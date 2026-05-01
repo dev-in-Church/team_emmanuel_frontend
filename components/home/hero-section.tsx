@@ -9,18 +9,18 @@ import { useState, useEffect } from "react";
 const heroSlides = [
   {
     image: "/images/hero-bg.jpg",
-    title: "Empowering Communities",
-    subtitle: "Transforming Lives",
+    title: "Empowering Young Athletes",
+    subtitle: "Through Sports & Education",
   },
   {
     image: "/images/community.jpg",
-    title: "Building Stronger",
-    subtitle: "Communities Together",
+    title: "Unlocking Potential",
+    subtitle: "Support. Train. Succeed.",
   },
   {
     image: "/images/education.jpg",
-    title: "Education for All",
-    subtitle: "Bright Futures Ahead",
+    title: "Building Future Champions",
+    subtitle: "On the Track and in School",
   },
 ];
 
@@ -55,6 +55,7 @@ export function HeroSection() {
             src={slide.image}
             alt={slide.title}
             fill
+            loading="eager"
             className="object-cover"
             priority={index === 0}
           />
@@ -62,7 +63,23 @@ export function HeroSection() {
       ))}
 
       {/* Dark Overlay with Gradient */}
-      <div className="absolute inset-0 bg-foreground/70" />
+      <div className="absolute inset-0 bg-foreground/50" />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to right, var(--foreground) 0%, transparent 75%)",
+          opacity: 0.6,
+        }}
+      />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to top, var(--foreground) 0%, transparent 50%)",
+          opacity: 0.4,
+        }}
+      />
 
       {/* Additional gradient for text readability */}
       {/* <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-foreground/30" /> */}
@@ -75,17 +92,25 @@ export function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div>
-            <h1 className="text-4xl md:text-5xl lg:text-5xl xl:text-4xl font-bold text-background leading-tight mb-6">
+            <h1
+              className="text-4xl md:text-5xl lg:text-5xl xl:text-4xl font-bold text-background leading-tight mb-6"
+              style={{ textShadow: "0 2px 16px rgba(0,0,0,0.5)" }}
+            >
               {heroSlides[currentSlide].title},{" "}
               <span className="text-primary">
                 {heroSlides[currentSlide].subtitle}
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-background/80 leading-relaxed mb-8 max-w-xl">
-              Team Emmanuel Foundation is dedicated to creating lasting change
-              through education, healthcare, and sustainable community
-              development programs across Kenya and beyond.
+            <p
+              className="text-lg md:text-xl text-background/80 leading-relaxed mb-8 max-w-xl"
+              style={{ textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}
+            >
+              Team Emmanuel Foundation is a youth-focused community initiative
+              that supports aspiring athletes with the resources they need to
+              succeed. Through access to training gear, education support, and
+              guidance, we help young people build discipline, confidence, and
+              opportunity.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">

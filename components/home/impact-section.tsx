@@ -6,35 +6,34 @@ import { Quote, Star, CheckCircle2 } from "lucide-react";
 const testimonials = [
   {
     quote:
-      "Thanks to Team Emmanuel Foundation, my children can now attend school. They provided uniforms, books, and even pays their school fees. We are forever grateful.",
-    name: "Emmanuel Ambundo",
-    role: "Parent & Beneficiary",
+      "Before joining Team Emmanuel, I didn’t have proper running shoes. Now I train with confidence and I’m chasing my goals both in school and on the track.",
+    name: "Daniel Kiptoo",
+    role: "Student Athlete",
     image: "/user.jpeg",
     rating: 5,
   },
   {
     quote:
-      "The healthcare camp organized by the foundation saved my life. I was diagnosed early and received treatment that I could never have afforded.",
-    name: "Leonard Bett",
-    role: "Community Member",
+      "The support I received helped me stay in school while continuing my training. It gave me discipline and a clear path forward.",
+    name: "Faith Cherono",
+    role: "Beneficiary",
     image: "/user.jpeg",
     rating: 5,
   },
   {
     quote:
-      "As a volunteer, I have witnessed firsthand the incredible work this foundation does. Every donation truly makes a difference in people's lives.",
-    name: "Mirian Jerotich",
-    role: "Volunteer",
+      "Being part of this initiative has changed how I see my future. I now have guidance, support, and the motivation to push further.",
+    name: "Brian Mutai",
+    role: "Young Athlete",
     image: "/user.jpeg",
     rating: 5,
   },
 ];
-
 const achievements = [
-  "5,000+ children enrolled in education programs",
-  "50+ communities served with healthcare",
-  "100+ clean water points established",
-  "1,000+ youth trained in vocational skills",
+  "200+ young athletes supported with running kits",
+  "100+ students assisted with school fees and uniforms",
+  "Active training and mentorship programs for youth",
+  "Growing community of disciplined and focused athletes",
 ];
 
 export function ImpactSection() {
@@ -53,14 +52,17 @@ export function ImpactSection() {
             <span className="inline-block text-primary font-semibold mb-3 text-sm uppercase tracking-wider">
               Our Impact
             </span>
+
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-              Stories of Hope and Transformation
+              Real Progress. Real Stories.
             </h2>
+
             <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-              Every day, we see the impact of your generosity in the smiles of
-              children going to school, families receiving healthcare, and
-              communities building a better future. Here are some stories from
-              the people whose lives have been touched by our work.
+              Every step forward matters. From athletes receiving their first
+              pair of running shoes to staying in school and building
+              discipline, our work is reflected in real progress. These are the
+              stories of young people pushing forward with the right support
+              behind them.
             </p>
 
             {/* Achievements List */}

@@ -9,62 +9,65 @@ import {
   Baby,
   Utensils,
   ArrowRight,
+  Activity,
+  Dumbbell,
+  Trophy,
 } from "lucide-react";
 
 const programs = [
   {
+    icon: Activity,
+    title: "Athlete Support",
+    description:
+      "Providing running kits, shoes, and essential gear to young athletes who lack access to proper equipment.",
+    color: "from-primary to-primary/80",
+    bgColor: "bg-primary/5",
+    image: "/images/athlete-support.jpg",
+  },
+  {
     icon: GraduationCap,
     title: "Education Support",
     description:
-      "Providing scholarships, school supplies, and educational resources to underprivileged children.",
-    color: "from-primary to-primary/80",
-    bgColor: "bg-primary/5",
+      "Supporting student-athletes with school fees, uniforms, and learning materials to keep them in school.",
+    color: "from-secondary to-secondary/80",
+    bgColor: "bg-secondary/5",
     image: "/images/education.jpg",
   },
   {
-    icon: HeartPulse,
-    title: "Healthcare Outreach",
+    icon: Dumbbell,
+    title: "Training & Development",
     description:
-      "Free medical camps, health education, and access to essential medicines for rural communities.",
-    color: "from-secondary to-secondary/80",
-    bgColor: "bg-secondary/5",
-    image: "/images/healthcare.jpg",
+      "Creating access to structured training, coaching guidance, and development opportunities for young runners.",
+    color: "from-primary to-primary/80",
+    bgColor: "bg-primary/5",
+    image: "/images/training.jpg",
   },
   {
     icon: Users,
-    title: "Community Development",
+    title: "Mentorship",
     description:
-      "Building infrastructure, clean water projects, and sustainable livelihood programs.",
-    color: "from-primary to-primary/80",
-    bgColor: "bg-primary/5",
-    image: "/images/community.jpg",
-  },
-  {
-    icon: Baby,
-    title: "Child Welfare",
-    description:
-      "Supporting orphans and vulnerable children with nutrition, shelter, and care programs.",
+      "Connecting young athletes with mentors who guide them in discipline, mindset, and life beyond sports.",
     color: "from-secondary to-secondary/80",
     bgColor: "bg-secondary/5",
-    image: "/images/gallery/outreach-2.jpg",
+    image: "/images/mentorship.jpg",
+  },
+  {
+    icon: Trophy,
+    title: "Talent Development",
+    description:
+      "Identifying and nurturing promising athletes, helping them grow their potential and pursue competitive opportunities.",
+    color: "from-primary to-primary/80",
+    bgColor: "bg-primary/5",
+    image: "/images/talent.jpg",
   },
   {
     icon: Sprout,
     title: "Youth Empowerment",
     description:
-      "Skills training, mentorship, and entrepreneurship programs for young people.",
-    color: "from-primary to-primary/80",
-    bgColor: "bg-primary/5",
-    image: "/images/gallery/outreach-4.jpg",
-  },
-  {
-    icon: Utensils,
-    title: "Food Security",
-    description:
-      "Fighting hunger through food distribution and sustainable farming initiatives.",
+      "Building confidence, discipline, and life skills through sports and education support programs.",
     color: "from-secondary to-secondary/80",
     bgColor: "bg-secondary/5",
-    image: "/images/gallery/outreach-1.jpg",
+    image: "/images/youth.jpg",
   },
 ];
 

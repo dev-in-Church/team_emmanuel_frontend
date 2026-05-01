@@ -5,36 +5,36 @@ import { Calendar, ArrowRight, User, Clock } from "lucide-react";
 
 const newsItems = [
   {
-    title: "Annual Fundraising Gala Raises KES 5 Million",
+    title: "Equipping Young Runners for the Season",
     excerpt:
-      "Our annual gala brought together donors and supporters, raising funds that will support education programs for over 500 children.",
+      "Team Emmanuel Foundation distributed running kits and shoes to young athletes, helping them train with confidence and consistency.",
     date: "March 15, 2026",
-    category: "Events",
-    author: "Emmanuel K.",
+    category: "Athletics",
+    author: "Team Emmanuel",
     readTime: "3 min read",
-    image: "/images/education.jpg",
+    image: "/images/training.jpg",
     featured: true,
   },
   {
-    title: "New Healthcare Clinic Opens in Turkana",
+    title: "Supporting Student-Athletes Stay in School",
     excerpt:
-      "In partnership with local health authorities, we have opened a new clinic that will serve over 10,000 community members.",
+      "Through our education support program, several young athletes received school fees and uniforms to continue their studies.",
     date: "March 10, 2026",
-    category: "Healthcare",
-    author: "Dr. James",
+    category: "Education",
+    author: "Team Emmanuel",
     readTime: "4 min read",
     image: "/images/education.jpg",
     featured: false,
   },
   {
-    title: "Youth Skills Training Program Graduates 100 Students",
+    title: "Mentorship Session Focused on Discipline and Growth",
     excerpt:
-      "Our vocational training program has successfully equipped 100 young people with skills in carpentry, tailoring, and agriculture.",
+      "Young athletes participated in a mentorship session focused on discipline, mindset, and balancing school with training.",
     date: "March 5, 2026",
-    category: "Education",
-    author: "Sarah K.",
-    readTime: "5 min read",
-    image: "/images/education.jpg",
+    category: "Mentorship",
+    author: "Team Emmanuel",
+    readTime: "3 min read",
+    image: "/images/mentorship.jpg",
     featured: false,
   },
 ];
@@ -56,9 +56,15 @@ export function NewsSection() {
             <span className="inline-block text-primary font-semibold mb-3 text-sm uppercase tracking-wider">
               Latest Updates
             </span>
+
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-              News & Stories
+              News & Stories from the Ground
             </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl">
+              Follow our journey as we support young athletes, provide
+              opportunities, and build a strong community through sports and
+              education.
+            </p>
           </div>
           <Button
             asChild

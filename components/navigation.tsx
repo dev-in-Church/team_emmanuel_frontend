@@ -28,10 +28,18 @@ const topBarLinks = [
 ];
 
 const socialLinks = [
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Youtube, href: "#", label: "Youtube" },
+  {
+    icon: Facebook,
+    href: "https://www.facebook.com/profile.php?id=100005860590320",
+    label: "Facebook",
+  },
+  // { icon: Twitter, href: "#", label: "Twitter" },
+  {
+    icon: Instagram,
+    href: "https://www.instagram.com/emmanuelbundotich?igsh=MTkzNTFxajhiNDV5dA==",
+    label: "Instagram",
+  },
+  // { icon: Youtube, href: "#", label: "Youtube" },
 ];
 
 const mainNavLinks = [
@@ -81,7 +89,7 @@ export function Navigation() {
                   <a
                     key={link.text}
                     href={link.href}
-                    className="flex items-center gap-2 hover:text-primary transition-colors"
+                    className="flex items-center gap-2 hover:text-secondary transition-colors"
                   >
                     <link.icon className="h-4 w-4" />
                     <span>{link.text}</span>
@@ -96,7 +104,7 @@ export function Navigation() {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="hover:text-primary transition-colors p-1 hover:scale-110 transform"
+                    className="hover:text-secondary transition-colors p-1 hover:scale-110 transform"
                     aria-label={link.label}
                   >
                     <link.icon className="h-4 w-4" />
@@ -113,13 +121,14 @@ export function Navigation() {
             <div className="flex items-center justify-between h-20">
               {/* Logo */}
               <Link href="/" className="flex items-center gap-3 group">
-                <Image
+                {/* <Image
                   src="/images/logo.png"
                   alt="Team Emmanuel Foundation"
                   width={60}
                   height={60}
-                  className="h-14 w-14 object-contain group-hover:scale-105 transition-transform"
-                />
+                  className="h-20 group-hover:scale-105 transition-transform"
+                /> */}
+                <img src="/images/logo.webp" alt="" className="h-18" />
                 <div className="hidden sm:block">
                   <h1 className="text-lg font-bold text-foreground leading-tight">
                     Team Emmanuel
@@ -188,7 +197,7 @@ export function Navigation() {
             onClick={() => setMobileMenuOpen(false)}
           >
             <Image
-              src="/images/logo.png"
+              src="/images/logo.webp"
               alt="Team Emmanuel Foundation"
               width={40}
               height={40}

@@ -5,6 +5,7 @@ import { ProgramsSection } from "@/components/home/programs-section";
 import { ImpactSection } from "@/components/home/impact-section";
 import { CTASection } from "@/components/home/cta-section";
 import { NewsSection } from "@/components/home/news-section";
+import { FloatingButtons } from "@/components/floating-buttons";
 
 export default function HomePage() {
   return (
@@ -17,6 +18,7 @@ export default function HomePage() {
         <NewsSection />
         {/* <CTASection /> */}
       </main>
+      <FloatingButtons />
       <Footer />
     </div>
   );

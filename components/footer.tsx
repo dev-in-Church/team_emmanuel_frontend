@@ -36,10 +36,18 @@ const programs = [
 ];
 
 const socialLinks = [
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Youtube, href: "#", label: "Youtube" },
+  {
+    icon: Facebook,
+    href: "https://www.facebook.com/profile.php?id=100005860590320",
+    label: "Facebook",
+  },
+  // { icon: Twitter, href: "#", label: "Twitter" },
+  {
+    icon: Instagram,
+    href: "https://www.instagram.com/emmanuelbundotich?igsh=MTkzNTFxajhiNDV5dA==",
+    label: "Instagram",
+  },
+  // { icon: Youtube, href: "#", label: "Youtube" },
 ];
 
 export function Footer() {
@@ -97,12 +105,10 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-6">
               <div className="bg-background rounded-full p-2">
-                <Image
-                  src="/images/logo.png"
-                  alt="Team Emmanuel Foundation"
-                  width={50}
-                  height={50}
-                  className="h-12 w-12 object-contain"
+                <img
+                  src="/images/logo.webp"
+                  alt=""
+                  className="h-18 w-18 object-contain"
                 />
               </div>
               <div>
@@ -111,9 +117,7 @@ export function Footer() {
               </div>
             </div>
             <p className="text-background/80 text-sm leading-relaxed mb-6">
-              Empowering communities through education, healthcare, and
-              sustainable development. Together, we can make a difference in the
-              lives of those who need it most.
+              Supporting young athletes on and off the track.
             </p>
             <div className="flex gap-3">
               {socialLinks.map((link) => (
@@ -180,13 +184,13 @@ export function Footer() {
             <ul className="flex flex-col gap-4">
               <li>
                 <a
-                  href="tel:+254700000000"
+                  href="tel:+254726147243"
                   className="flex items-center gap-3 text-background/80 hover:text-primary transition-colors text-sm group"
                 >
                   <div className="h-10 w-10 rounded-full bg-background/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors shrink-0">
                     <Phone className="h-5 w-5" />
                   </div>
-                  <span>+254 700 000 000</span>
+                  <span>+254 726 147 243</span>
                 </a>
               </li>
               <li>
@@ -206,9 +210,9 @@ export function Footer() {
                     <MapPin className="h-5 w-5" />
                   </div>
                   <span>
-                    123 Foundation Street,
-                    <br />
-                    Nairobi, Kenya
+                    {/* 123 Foundation Street,
+                    <br /> */}
+                    Iten, Kenya
                   </span>
                 </div>
               </li>
@@ -217,7 +221,7 @@ export function Footer() {
             {/* Donate Button */}
             <Button
               asChild
-              className="mt-6 w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full"
+              className="mt-6 w-full bg-secondary hover:bg-secondary/90 border-primary border-2 text-secondary-foreground rounded-full"
             >
               <Link href="/donate">
                 Donate Now
@@ -246,7 +250,7 @@ export function Footer() {
             </div>
             <p className="flex items-center gap-1">
               Made with{" "}
-              <Heart className="h-4 w-4 text-secondary fill-secondary animate-pulse" />{" "}
+              <Heart className="h-4 w-4 text-primary fill-secondary animate-pulse" />{" "}
               for the community
             </p>
           </div>
