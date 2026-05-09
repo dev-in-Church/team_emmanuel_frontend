@@ -12,7 +12,7 @@ const newsItems = [
     category: "Athletics",
     author: "Team Emmanuel",
     readTime: "3 min read",
-    image: "/images/training.jpg",
+    image: "/images/training.jpeg",
     featured: true,
   },
   {
@@ -23,7 +23,7 @@ const newsItems = [
     category: "Education",
     author: "Team Emmanuel",
     readTime: "4 min read",
-    image: "/images/education.jpg",
+    image: "/images/education.jpeg",
     featured: false,
   },
   {
@@ -34,7 +34,7 @@ const newsItems = [
     category: "Mentorship",
     author: "Team Emmanuel",
     readTime: "3 min read",
-    image: "/images/mentorship.jpg",
+    image: "/images/mentorship.jpeg",
     featured: false,
   },
 ];

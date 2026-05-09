@@ -22,7 +22,7 @@ const programs = [
       "Providing running kits, shoes, and essential gear to young athletes who lack access to proper equipment.",
     color: "from-primary to-primary/80",
     bgColor: "bg-primary/5",
-    image: "/images/athlete-support.jpg",
+    image: "/images/support.jpeg",
   },
   {
     icon: GraduationCap,
@@ -31,7 +31,7 @@ const programs = [
       "Supporting student-athletes with school fees, uniforms, and learning materials to keep them in school.",
     color: "from-secondary to-secondary/80",
     bgColor: "bg-secondary/5",
-    image: "/images/education.jpg",
+    image: "/images/education.jpeg",
   },
   {
     icon: Dumbbell,
@@ -40,7 +40,7 @@ const programs = [
       "Creating access to structured training, coaching guidance, and development opportunities for young runners.",
     color: "from-primary to-primary/80",
     bgColor: "bg-primary/5",
-    image: "/images/training.jpg",
+    image: "/images/training.jpeg",
   },
   {
     icon: Users,
@@ -49,7 +49,7 @@ const programs = [
       "Connecting young athletes with mentors who guide them in discipline, mindset, and life beyond sports.",
     color: "from-secondary to-secondary/80",
     bgColor: "bg-secondary/5",
-    image: "/images/mentorship.jpg",
+    image: "/images/mentorship.jpeg",
   },
   {
     icon: Trophy,
@@ -58,7 +58,7 @@ const programs = [
       "Identifying and nurturing promising athletes, helping them grow their potential and pursue competitive opportunities.",
     color: "from-primary to-primary/80",
     bgColor: "bg-primary/5",
-    image: "/images/talent.jpg",
+    image: "/images/talent.jpeg",
   },
   {
     icon: Sprout,
@@ -67,7 +67,7 @@ const programs = [
       "Building confidence, discipline, and life skills through sports and education support programs.",
     color: "from-secondary to-secondary/80",
     bgColor: "bg-secondary/5",
-    image: "/images/youth.jpg",
+    image: "/images/youth.jpeg",
   },
 ];
 

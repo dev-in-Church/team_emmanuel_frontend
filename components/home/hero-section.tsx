@@ -8,17 +8,17 @@ import { useState, useEffect } from "react";
 
 const heroSlides = [
   {
-    image: "/images/hero-bg.jpg",
+    image: "/images/hero.jpeg",
     title: "Empowering Young Athletes",
     subtitle: "Through Sports & Education",
   },
   {
-    image: "/images/community.jpg",
+    image: "/images/hero2.jpeg",
     title: "Unlocking Potential",
     subtitle: "Support. Train. Succeed.",
   },
   {
-    image: "/images/education.jpg",
+    image: "/images/hero3.jpeg",
     title: "Building Future Champions",
     subtitle: "On the Track and in School",
   },

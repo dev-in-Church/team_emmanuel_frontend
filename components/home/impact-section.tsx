@@ -9,7 +9,7 @@ const testimonials = [
       "Before joining Team Emmanuel, I didn’t have proper running shoes. Now I train with confidence and I’m chasing my goals both in school and on the track.",
     name: "Daniel Kiptoo",
     role: "Student Athlete",
-    image: "/user.jpeg",
+    image: "/user.png",
     rating: 5,
   },
   {
@@ -17,7 +17,7 @@ const testimonials = [
       "The support I received helped me stay in school while continuing my training. It gave me discipline and a clear path forward.",
     name: "Faith Cherono",
     role: "Beneficiary",
-    image: "/user.jpeg",
+    image: "/user.png",
     rating: 5,
   },
   {
@@ -25,7 +25,7 @@ const testimonials = [
       "Being part of this initiative has changed how I see my future. I now have guidance, support, and the motivation to push further.",
     name: "Brian Mutai",
     role: "Young Athlete",
-    image: "/user.jpeg",
+    image: "/user.png",
     rating: 5,
   },
 ];
