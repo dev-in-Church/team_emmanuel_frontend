@@ -23,7 +23,7 @@ const quickLinks = [
   { text: "About Us", href: "/about" },
   { text: "Programs", href: "/programs" },
   { text: "Gallery", href: "/gallery" },
-  { text: "Events", href: "/events" },
+  { text: "News", href: "/news" },
   { text: "Contact", href: "/contact" },
 ];
 
@@ -248,10 +248,18 @@ export function Footer() {
                 Terms of Service
               </Link>
             </div>
-            <p className="flex items-center gap-1">
-              Made with{" "}
+            <p className="">
+              {/* Made with{" "}
               <Heart className="h-4 w-4 text-primary fill-secondary animate-pulse" />{" "}
-              for the community
+              for the community */}
+              made by{" "}
+              <Link
+                href="https://sporttechies.com"
+                target="_blank"
+                className="text-primary"
+              >
+                SportTechies
+              </Link>
             </p>
           </div>
         </div>

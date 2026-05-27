@@ -1,106 +1,127 @@
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Calendar, ArrowRight, User } from "lucide-react"
-import Link from "next/link"
+import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
+import { Calendar, ArrowRight, User } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
 
 const newsArticles = [
   {
     id: 1,
-    title: "Annual Fundraising Gala Raises KES 5 Million",
-    excerpt: "Our annual gala brought together donors and supporters, raising funds that will support education programs for over 500 children in the coming year.",
-    content: "The event was attended by over 300 guests including corporate partners, individual donors, and community leaders.",
+    title: "Team Emmanuel Athletes Shine at Regional Championships",
+    excerpt:
+      "Young athletes supported by Team Emmanuel Foundation delivered impressive performances during the regional athletics championships.",
     date: "March 15, 2026",
     author: "Team Emmanuel",
-    category: "Events",
+    category: "Competitions",
+    image: "/images/gallery/10.jpeg",
     featured: true,
   },
   {
     id: 2,
-    title: "New Healthcare Clinic Opens in Turkana",
-    excerpt: "In partnership with local health authorities, we have opened a new clinic that will serve over 10,000 community members in the remote Turkana region.",
-    content: "The clinic offers maternal and child health services, general consultations, and a pharmacy.",
+    title: "Running Kits Distributed to Upcoming Athletes",
+    excerpt:
+      "Athletes received running kits, shoes, and training essentials to support their preparation and development.",
     date: "March 10, 2026",
-    author: "Grace Mwangi",
-    category: "Healthcare",
+    author: "Emmanuel K.",
+    category: "Support",
+    image: "/images/gallery/11.jpeg",
     featured: true,
   },
   {
     id: 3,
-    title: "Youth Skills Training Program Graduates 100 Students",
-    excerpt: "Our vocational training program has successfully equipped 100 young people with skills in carpentry, tailoring, and agriculture.",
-    content: "Graduates received certificates and startup kits to begin their own businesses.",
-    date: "March 5, 2026",
-    author: "David Ouma",
+    title: "Balancing Education and Athletics",
+    excerpt:
+      "Student-athletes continue receiving academic support as they pursue excellence both in school and sports.",
+    date: "March 6, 2026",
+    author: "Team Emmanuel",
     category: "Education",
+    image: "/images/gallery/12.jpeg",
     featured: false,
   },
   {
     id: 4,
-    title: "Clean Water Project Completed in Machakos",
-    excerpt: "A new borehole serving 5,000 residents has been completed, providing clean and safe drinking water to the community.",
-    content: "The project was completed in partnership with Water.org and local authorities.",
+    title: "Weekend Training Camp Brings Together Young Talent",
+    excerpt:
+      "Athletes from different communities gathered for intensive endurance and mentorship sessions.",
     date: "February 28, 2026",
-    author: "Team Emmanuel",
-    category: "Community",
+    author: "Coach Leonard",
+    category: "Training",
+    image: "/images/gallery/13.jpeg",
     featured: false,
   },
   {
     id: 5,
-    title: "Partnership Announcement: Tech for Good Initiative",
-    excerpt: "We are excited to announce a new partnership with local tech companies to provide computer training to underprivileged youth.",
-    content: "The initiative will set up computer labs in 10 schools and provide certified training programs.",
-    date: "February 20, 2026",
-    author: "Emmanuel Kiprop",
-    category: "Partnerships",
+    title: "Community Support Driving Athlete Growth",
+    excerpt:
+      "Local supporters and volunteers continue playing an important role in empowering young athletes.",
+    date: "February 21, 2026",
+    author: "Team Emmanuel",
+    category: "Community",
+    image: "/images/gallery/14.jpeg",
     featured: false,
   },
   {
     id: 6,
-    title: "Food Distribution Reaches 2,000 Families During Drought",
-    excerpt: "Our emergency response team has distributed food supplies to 2,000 families affected by the ongoing drought in northern Kenya.",
-    content: "Each family received a month's supply of maize, beans, and cooking oil.",
+    title: "Mentorship Sessions Focus on Discipline and Mindset",
+    excerpt:
+      "Athletes participated in mentorship discussions centered around consistency, confidence, and long-term growth.",
     date: "February 15, 2026",
-    author: "Faith Njeri",
-    category: "Emergency Response",
+    author: "Grace Bett",
+    category: "Mentorship",
+    image: "/images/gallery/15.jpeg",
     featured: false,
   },
-]
+];
 
-const categories = ["All", "Events", "Healthcare", "Education", "Community", "Partnerships", "Emergency Response"]
+const categories = [
+  "All",
+  "Competitions",
+  "Training",
+  "Education",
+  "Mentorship",
+  "Support",
+  "Community",
+];
 
 export default function NewsPage() {
-  const featuredArticles = newsArticles.filter((article) => article.featured)
-  const regularArticles = newsArticles.filter((article) => !article.featured)
+  const featuredArticles = newsArticles.filter((article) => article.featured);
+
+  const regularArticles = newsArticles.filter((article) => !article.featured);
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
+
       <main className="flex-1">
         {/* Hero */}
-        <section className="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20">
+        <section className="py-20 border-b border-border">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl">
-              <p className="text-primary font-semibold mb-2">News & Stories</p>
+              <p className="text-primary font-semibold mb-2 uppercase tracking-wider text-sm">
+                News & Updates
+              </p>
+
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
-                Latest Updates from the Field
+                Stories from the Journey
               </h1>
+
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Stay informed about our programs, events, and the impact we are making 
-                in communities across Kenya.
+                Follow the latest updates from Team Emmanuel Foundation
+                including competitions, training sessions, mentorship programs,
+                athlete support initiatives, and community activities.
               </p>
             </div>
           </div>
         </section>
 
         {/* Categories */}
-        <section className="border-b border-border">
+        <section className="py-8 border-b border-border">
           <div className="container mx-auto px-4">
-            <div className="flex gap-2 overflow-x-auto py-4 -mx-4 px-4">
+            <div className="flex gap-2 overflow-x-auto scrollbar-hide">
               {categories.map((category) => (
                 <button
                   key={category}
-                  className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap ${
+                  className={`px-5 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
                     category === "All"
                       ? "bg-primary text-primary-foreground"
                       : "bg-muted text-muted-foreground hover:bg-muted/80"
@@ -114,112 +135,178 @@ export default function NewsPage() {
         </section>
 
         {/* Featured Articles */}
-        <section className="py-12">
+        <section className="py-16">
           <div className="container mx-auto px-4">
-            <h2 className="text-2xl font-bold text-foreground mb-6">Featured Stories</h2>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="mb-10">
+              <h2 className="text-2xl font-bold text-foreground">
+                Featured Stories
+              </h2>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-8">
               {featuredArticles.map((article) => (
-                <Card key={article.id} className="overflow-hidden hover:shadow-lg transition-shadow group">
-                  <div className="h-56 bg-gradient-to-br from-primary/20 to-secondary/20" />
-                  <CardHeader>
-                    <div className="flex items-center gap-4 mb-2">
-                      <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
-                        {article.category}
-                      </span>
-                      <span className="text-xs text-muted-foreground flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        {article.date}
-                      </span>
+                <Link
+                  key={article.id}
+                  href={`/news/${article.id}`}
+                  className="group"
+                >
+                  <article className="overflow-hidden border border-border rounded-sm bg-background hover:shadow-lg transition-all duration-300">
+                    <div className="relative h-72 overflow-hidden">
+                      <Image
+                        src={article.image}
+                        alt={article.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+
+                      <div className="absolute bottom-6 left-6 right-6">
+                        <span className="inline-flex text-xs font-medium text-white bg-white/10 backdrop-blur-sm px-3 py-1 rounded-full mb-4">
+                          {article.category}
+                        </span>
+
+                        <h3 className="text-2xl font-bold text-white leading-tight">
+                          {article.title}
+                        </h3>
+                      </div>
                     </div>
-                    <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                      {article.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="mb-4">{article.excerpt}</CardDescription>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground flex items-center gap-2">
-                        <User className="h-4 w-4" />
-                        {article.author}
-                      </span>
-                      <Link
-                        href={`/news/${article.id}`}
-                        className="text-sm text-primary font-medium flex items-center gap-1 hover:underline"
-                      >
-                        Read More
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
+
+                    <div className="p-6">
+                      <p className="text-muted-foreground leading-relaxed mb-6">
+                        {article.excerpt}
+                      </p>
+
+                      <div className="flex items-center justify-between text-sm text-muted-foreground">
+                        <div className="flex items-center gap-4">
+                          <span className="flex items-center gap-1">
+                            <User className="h-4 w-4" />
+                            {article.author}
+                          </span>
+
+                          <span className="flex items-center gap-1">
+                            <Calendar className="h-4 w-4" />
+                            {article.date}
+                          </span>
+                        </div>
+
+                        <span className="inline-flex items-center text-primary font-medium">
+                          Read More
+                          <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        </span>
+                      </div>
                     </div>
-                  </CardContent>
-                </Card>
+                  </article>
+                </Link>
               ))}
             </div>
           </div>
         </section>
 
         {/* All Articles */}
-        <section className="py-12 bg-muted/30">
+        <section className="py-16 border-t border-border">
           <div className="container mx-auto px-4">
-            <h2 className="text-2xl font-bold text-foreground mb-6">All News</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="mb-10">
+              <h2 className="text-2xl font-bold text-foreground">
+                Latest Updates
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {regularArticles.map((article) => (
-                <Card key={article.id} className="hover:shadow-lg transition-shadow group">
-                  <div className="h-40 bg-gradient-to-br from-primary/10 to-secondary/10" />
-                  <CardHeader>
-                    <div className="flex items-center gap-4 mb-2">
-                      <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
-                        {article.category}
-                      </span>
-                      <span className="text-xs text-muted-foreground flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        {article.date}
-                      </span>
+                <Link
+                  key={article.id}
+                  href={`/news/${article.id}`}
+                  className="group"
+                >
+                  <article className="overflow-hidden border border-border rounded-sm bg-background hover:shadow-lg transition-all duration-300 h-full">
+                    <div className="relative h-56 overflow-hidden">
+                      <Image
+                        src={article.image}
+                        alt={article.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
                     </div>
-                    <CardTitle className="text-lg group-hover:text-primary transition-colors line-clamp-2">
-                      {article.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="line-clamp-2 mb-4">{article.excerpt}</CardDescription>
-                    <Link
-                      href={`/news/${article.id}`}
-                      className="text-sm text-primary font-medium flex items-center gap-1 hover:underline"
-                    >
-                      Read More
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </CardContent>
-                </Card>
+
+                    <div className="p-6">
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="text-xs font-medium text-primary bg-primary/10 px-2.5 py-1 rounded-full">
+                          {article.category}
+                        </span>
+
+                        <span className="text-xs text-muted-foreground flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          {article.date}
+                        </span>
+                      </div>
+
+                      <h3 className="text-xl font-bold text-foreground mb-3 leading-snug group-hover:text-primary transition-colors">
+                        {article.title}
+                      </h3>
+
+                      <p className="text-muted-foreground leading-relaxed mb-6">
+                        {article.excerpt}
+                      </p>
+
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-muted-foreground flex items-center gap-2">
+                          <User className="h-4 w-4" />
+                          {article.author}
+                        </span>
+
+                        <span className="inline-flex items-center text-primary font-medium text-sm">
+                          Read More
+                          <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        </span>
+                      </div>
+                    </div>
+                  </article>
+                </Link>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Newsletter */}
-        <section className="py-20 bg-foreground text-background">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Stay Updated</h2>
-            <p className="text-background/70 max-w-2xl mx-auto mb-8">
-              Subscribe to our newsletter to receive the latest news, stories, and updates 
-              from Team Emmanuel Foundation.
-            </p>
-            <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg bg-background/10 border border-background/20 text-background placeholder:text-background/50 focus:outline-none focus:border-primary"
-              />
-              <button
-                type="submit"
-                className="px-6 py-3 bg-secondary text-secondary-foreground rounded-lg font-medium hover:bg-secondary/90 transition-colors"
-              >
-                Subscribe
-              </button>
-            </form>
+        {/* CTA */}
+        <section className="py-20 border-t border-border">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl">
+              <p className="text-primary font-semibold mb-2 uppercase tracking-wider text-sm">
+                Stay Connected
+              </p>
+
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Follow the Journey
+              </h2>
+
+              <p className="text-muted-foreground text-lg leading-relaxed mb-8">
+                Stay updated with the latest stories, athlete achievements,
+                training sessions, mentorship programs, and community
+                initiatives from Team Emmanuel Foundation.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-sm font-medium hover:bg-primary/90 transition-colors"
+                >
+                  Contact Us
+                </Link>
+
+                <Link
+                  href="/gallery"
+                  className="inline-flex items-center justify-center px-6 py-3 border border-border rounded-sm font-medium hover:bg-muted transition-colors"
+                >
+                  View Gallery
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
       </main>
+
       <Footer />
     </div>
-  )
+  );
 }

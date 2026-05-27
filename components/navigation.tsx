@@ -47,7 +47,7 @@ const mainNavLinks = [
   { text: "About Us", href: "/about" },
   { text: "Programs", href: "/programs" },
   { text: "Gallery", href: "/gallery" },
-  { text: "Events", href: "/events" },
+  // { text: "Events", href: "/events" },
   { text: "News", href: "/news" },
   { text: "Contact", href: "/contact" },
 ];

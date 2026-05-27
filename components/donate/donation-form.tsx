@@ -1,17 +1,27 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
-import { CreditCard, Smartphone, Heart, CheckCircle, Loader2 } from "lucide-react"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  CreditCard,
+  Smartphone,
+  Heart,
+  CheckCircle,
+  Loader2,
+  ShieldCheck,
+} from "lucide-react";
 
-const suggestedAmounts = [500, 1000, 2500, 5000, 10000, 25000]
+const suggestedAmounts = [500, 1000, 2500, 5000, 10000, 25000];
 
 const programs = [
   { value: "general", label: "Where Most Needed" },
@@ -20,29 +30,30 @@ const programs = [
   { value: "community", label: "Community Development" },
   { value: "youth", label: "Youth Empowerment" },
   { value: "food", label: "Food Security" },
-]
+];
 
 interface DonationFormProps {
-  onSubmit?: (data: DonationData) => void
+  onSubmit?: (data: DonationData) => void;
 }
 
 interface DonationData {
-  amount: number
-  frequency: "one-time" | "monthly"
-  program: string
-  paymentMethod: "mpesa" | "card"
-  name: string
-  email: string
-  phone?: string
-  cardNumber?: string
-  cardExpiry?: string
-  cardCvc?: string
-  isAnonymous: boolean
+  amount: number;
+  frequency: "one-time" | "monthly";
+  program: string;
+  paymentMethod: "mpesa" | "card";
+  name: string;
+  email: string;
+  phone?: string;
+  cardNumber?: string;
+  cardExpiry?: string;
+  cardCvc?: string;
+  isAnonymous: boolean;
 }
 
 export function DonationForm({ onSubmit }: DonationFormProps) {
-  const [step, setStep] = useState(1)
-  const [loading, setLoading] = useState(false)
+  const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState<DonationData>({
     amount: 1000,
     frequency: "one-time",
@@ -52,56 +63,57 @@ export function DonationForm({ onSubmit }: DonationFormProps) {
     email: "",
     phone: "",
     isAnonymous: false,
-  })
-
-  const handleAmountSelect = (amount: number) => {
-    setFormData({ ...formData, amount })
-  }
-
-  const handleCustomAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value) || 0
-    setFormData({ ...formData, amount: value })
-  }
+  });
 
   const handleSubmit = async () => {
-    setLoading(true)
-    // Simulate payment processing
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    setLoading(false)
-    setStep(3)
-    onSubmit?.(formData)
-  }
+    setLoading(true);
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    setLoading(false);
+    setStep(3);
+
+    onSubmit?.(formData);
+  };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto">
-      <CardHeader className="text-center border-b">
-        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+    <div className="w-full rounded-3xl border bg-background">
+      {/* Header */}
+      <div className="border-b p-8 md:p-10 text-center">
+        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
           <Heart className="h-8 w-8 text-primary" />
         </div>
-        <CardTitle className="text-2xl">Make a Donation</CardTitle>
-        <CardDescription>
-          Your generosity helps us transform lives and communities
-        </CardDescription>
-      </CardHeader>
 
-      <CardContent className="p-6">
-        {/* Progress Steps */}
-        <div className="flex items-center justify-center gap-4 mb-8">
+        <h2 className="text-3xl font-bold text-foreground mb-3">
+          Support Our Mission
+        </h2>
+
+        <p className="text-muted-foreground max-w-lg mx-auto leading-relaxed">
+          Your contribution helps us support young athletes through mentorship,
+          education, sports development, and community programs.
+        </p>
+      </div>
+
+      {/* Content */}
+      <div className="p-8 md:p-10">
+        {/* Steps */}
+        <div className="flex items-center justify-center gap-4 mb-10">
           {[1, 2, 3].map((s) => (
             <div key={s} className="flex items-center">
               <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
                   step >= s
                     ? "bg-primary text-primary-foreground"
                     : "bg-muted text-muted-foreground"
                 }`}
               >
-                {step > s ? <CheckCircle className="h-5 w-5" /> : s}
+                {step > s ? <CheckCircle className="h-4 w-4" /> : s}
               </div>
+
               {s < 3 && (
                 <div
-                  className={`w-12 h-1 mx-2 ${
-                    step > s ? "bg-primary" : "bg-muted"
+                  className={`w-14 h-[2px] mx-2 ${
+                    step > s ? "bg-primary" : "bg-border"
                   }`}
                 />
               )}
@@ -109,80 +121,124 @@ export function DonationForm({ onSubmit }: DonationFormProps) {
           ))}
         </div>
 
-        {/* Step 1: Amount Selection */}
+        {/* STEP 1 */}
         {step === 1 && (
-          <div className="flex flex-col gap-6">
+          <div className="space-y-8">
             {/* Frequency */}
-            <div className="flex flex-col gap-3">
+            <div className="space-y-3">
               <Label>Donation Frequency</Label>
-              <RadioGroup
-                value={formData.frequency}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, frequency: value as "one-time" | "monthly" })
-                }
-                className="flex gap-4"
-              >
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem value="one-time" id="one-time" />
-                  <Label htmlFor="one-time" className="font-normal cursor-pointer">
-                    One-time
-                  </Label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem value="monthly" id="monthly" />
-                  <Label htmlFor="monthly" className="font-normal cursor-pointer">
-                    Monthly
-                  </Label>
-                </div>
-              </RadioGroup>
+
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setFormData({
+                      ...formData,
+                      frequency: "one-time",
+                    })
+                  }
+                  className={`rounded-2xl border px-4 py-4 text-sm font-medium transition-all ${
+                    formData.frequency === "one-time"
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border hover:border-primary/40"
+                  }`}
+                >
+                  One-time
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setFormData({
+                      ...formData,
+                      frequency: "monthly",
+                    })
+                  }
+                  className={`rounded-2xl border px-4 py-4 text-sm font-medium transition-all ${
+                    formData.frequency === "monthly"
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border hover:border-primary/40"
+                  }`}
+                >
+                  Monthly
+                </button>
+              </div>
             </div>
 
-            {/* Amount Selection */}
-            <div className="flex flex-col gap-3">
-              <Label>Select Amount (KES)</Label>
-              <div className="grid grid-cols-3 gap-3">
+            {/* Amounts */}
+            <div className="space-y-4">
+              <Label>Select Amount</Label>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {suggestedAmounts.map((amount) => (
                   <button
+                    type="button"
                     key={amount}
-                    onClick={() => handleAmountSelect(amount)}
-                    className={`py-3 px-4 rounded-lg border-2 font-semibold transition-colors ${
+                    onClick={() =>
+                      setFormData({
+                        ...formData,
+                        amount,
+                      })
+                    }
+                    className={`rounded-2xl border p-5 text-left transition-all hover:border-primary ${
                       formData.amount === amount
-                        ? "border-primary bg-primary/10 text-primary"
-                        : "border-border hover:border-primary/50"
+                        ? "border-primary bg-primary/5"
+                        : "border-border"
                     }`}
                   >
-                    KES {amount.toLocaleString()}
+                    <div className="text-lg font-bold">
+                      KES {amount.toLocaleString()}
+                    </div>
+
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Support a program
+                    </p>
                   </button>
                 ))}
               </div>
-              <div className="mt-2">
-                <Label htmlFor="custom-amount">Or enter custom amount</Label>
-                <div className="relative mt-2">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+
+              <div className="space-y-2">
+                <Label htmlFor="custom-amount">Custom Amount</Label>
+
+                <div className="relative">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
                     KES
                   </span>
+
                   <Input
                     id="custom-amount"
                     type="number"
-                    placeholder="Enter amount"
                     value={formData.amount || ""}
-                    onChange={handleCustomAmount}
-                    className="pl-12"
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        amount: parseInt(e.target.value) || 0,
+                      })
+                    }
+                    placeholder="Enter custom amount"
+                    className="pl-14 h-12 rounded-xl"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Program Selection */}
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="program">Donate to</Label>
+            {/* Program */}
+            <div className="space-y-2">
+              <Label>Donate To</Label>
+
               <Select
                 value={formData.program}
-                onValueChange={(value) => setFormData({ ...formData, program: value })}
+                onValueChange={(value) =>
+                  setFormData({
+                    ...formData,
+                    program: value,
+                  })
+                }
               >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a program" />
+                <SelectTrigger className="h-12 rounded-xl">
+                  <SelectValue placeholder="Select program" />
                 </SelectTrigger>
+
                 <SelectContent>
                   {programs.map((program) => (
                     <SelectItem key={program.value} value={program.value}>
@@ -194,159 +250,265 @@ export function DonationForm({ onSubmit }: DonationFormProps) {
             </div>
 
             <Button
-              onClick={() => setStep(2)}
               size="lg"
-              className="mt-4"
+              className="w-full h-12 rounded-xl"
               disabled={formData.amount < 100}
+              onClick={() => setStep(2)}
             >
               Continue
             </Button>
           </div>
         )}
 
-        {/* Step 2: Payment Details */}
+        {/* STEP 2 */}
         {step === 2 && (
-          <div className="flex flex-col gap-6">
-            {/* Donor Information */}
-            <div className="flex flex-col gap-4">
-              <h3 className="font-semibold">Your Information</h3>
+          <div className="space-y-8">
+            {/* User info */}
+            <div className="space-y-5">
+              <div>
+                <h3 className="font-semibold text-lg">Your Information</h3>
+
+                <p className="text-sm text-muted-foreground mt-1">
+                  Enter your details to continue
+                </p>
+              </div>
+
               <div className="grid sm:grid-cols-2 gap-4">
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="name">Full Name</Label>
+                <div className="space-y-2">
+                  <Label>Full Name</Label>
+
                   <Input
-                    id="name"
                     placeholder="John Doe"
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    required
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        name: e.target.value,
+                      })
+                    }
+                    className="h-12 rounded-xl"
                   />
                 </div>
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="email">Email</Label>
+
+                <div className="space-y-2">
+                  <Label>Email Address</Label>
+
                   <Input
-                    id="email"
                     type="email"
                     placeholder="john@example.com"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        email: e.target.value,
+                      })
+                    }
+                    className="h-12 rounded-xl"
                   />
                 </div>
               </div>
-              <div className="flex items-center gap-2">
+
+              <div className="flex items-center gap-3">
                 <Checkbox
-                  id="anonymous"
                   checked={formData.isAnonymous}
                   onCheckedChange={(checked) =>
-                    setFormData({ ...formData, isAnonymous: checked as boolean })
+                    setFormData({
+                      ...formData,
+                      isAnonymous: checked as boolean,
+                    })
                   }
                 />
-                <Label htmlFor="anonymous" className="font-normal cursor-pointer">
+
+                <Label className="font-normal cursor-pointer">
                   Make my donation anonymous
                 </Label>
               </div>
             </div>
 
-            {/* Payment Method */}
-            <div className="flex flex-col gap-4">
-              <h3 className="font-semibold">Payment Method</h3>
-              <Tabs
-                value={formData.paymentMethod}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, paymentMethod: value as "mpesa" | "card" })
-                }
-              >
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="mpesa" className="gap-2">
-                    <Smartphone className="h-4 w-4" />
-                    M-Pesa
-                  </TabsTrigger>
-                  <TabsTrigger value="card" className="gap-2">
-                    <CreditCard className="h-4 w-4" />
-                    Card
-                  </TabsTrigger>
-                </TabsList>
+            {/* Payment method */}
+            <div className="space-y-4">
+              <div>
+                <h3 className="font-semibold text-lg">Payment Method</h3>
 
-                <TabsContent value="mpesa" className="mt-4">
-                  <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
-                    <div className="flex flex-col gap-4">
-                      <div className="flex flex-col gap-2">
-                        <Label htmlFor="phone">M-Pesa Phone Number</Label>
-                        <Input
-                          id="phone"
-                          type="tel"
-                          placeholder="07XX XXX XXX"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        />
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        You will receive an M-Pesa STK push to complete the payment.
-                      </p>
-                    </div>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Choose your preferred payment option
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setFormData({
+                      ...formData,
+                      paymentMethod: "mpesa",
+                    })
+                  }
+                  className={`rounded-2xl border p-5 text-left transition-all ${
+                    formData.paymentMethod === "mpesa"
+                      ? "border-primary bg-primary/5"
+                      : "border-border hover:border-primary/40"
+                  }`}
+                >
+                  <Smartphone className="h-6 w-6 mb-3 text-primary" />
+
+                  <div className="font-semibold">M-Pesa</div>
+
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Fast and secure mobile payment
+                  </p>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setFormData({
+                      ...formData,
+                      paymentMethod: "card",
+                    })
+                  }
+                  className={`rounded-2xl border p-5 text-left transition-all ${
+                    formData.paymentMethod === "card"
+                      ? "border-primary bg-primary/5"
+                      : "border-border hover:border-primary/40"
+                  }`}
+                >
+                  <CreditCard className="h-6 w-6 mb-3 text-primary" />
+
+                  <div className="font-semibold">Card</div>
+
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Visa, Mastercard & more
+                  </p>
+                </button>
+              </div>
+
+              {/* M-Pesa */}
+              {formData.paymentMethod === "mpesa" && (
+                <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
+                  <div className="space-y-2">
+                    <Label>M-Pesa Phone Number</Label>
+
+                    <Input
+                      type="tel"
+                      placeholder="07XX XXX XXX"
+                      value={formData.phone}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          phone: e.target.value,
+                        })
+                      }
+                      className="h-12 rounded-xl bg-background"
+                    />
+
+                    <p className="text-xs text-muted-foreground">
+                      You will receive an STK Push on your phone.
+                    </p>
                   </div>
-                </TabsContent>
+                </div>
+              )}
 
-                <TabsContent value="card" className="mt-4">
-                  <div className="flex flex-col gap-4">
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="card-number">Card Number</Label>
+              {/* Card */}
+              {formData.paymentMethod === "card" && (
+                <div className="space-y-4 rounded-2xl border p-5">
+                  <div className="space-y-2">
+                    <Label>Card Number</Label>
+
+                    <Input
+                      placeholder="1234 5678 9012 3456"
+                      value={formData.cardNumber}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          cardNumber: e.target.value,
+                        })
+                      }
+                      className="h-12 rounded-xl"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label>Expiry Date</Label>
+
                       <Input
-                        id="card-number"
-                        placeholder="1234 5678 9012 3456"
-                        value={formData.cardNumber}
-                        onChange={(e) => setFormData({ ...formData, cardNumber: e.target.value })}
+                        placeholder="MM/YY"
+                        value={formData.cardExpiry}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            cardExpiry: e.target.value,
+                          })
+                        }
+                        className="h-12 rounded-xl"
                       />
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="flex flex-col gap-2">
-                        <Label htmlFor="expiry">Expiry Date</Label>
-                        <Input
-                          id="expiry"
-                          placeholder="MM/YY"
-                          value={formData.cardExpiry}
-                          onChange={(e) => setFormData({ ...formData, cardExpiry: e.target.value })}
-                        />
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <Label htmlFor="cvc">CVC</Label>
-                        <Input
-                          id="cvc"
-                          placeholder="123"
-                          value={formData.cardCvc}
-                          onChange={(e) => setFormData({ ...formData, cardCvc: e.target.value })}
-                        />
-                      </div>
+
+                    <div className="space-y-2">
+                      <Label>CVC</Label>
+
+                      <Input
+                        placeholder="123"
+                        value={formData.cardCvc}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            cardCvc: e.target.value,
+                          })
+                        }
+                        className="h-12 rounded-xl"
+                      />
                     </div>
                   </div>
-                </TabsContent>
-              </Tabs>
+                </div>
+              )}
             </div>
 
             {/* Summary */}
-            <div className="p-4 bg-muted rounded-lg">
-              <h4 className="font-semibold mb-2">Donation Summary</h4>
-              <div className="flex justify-between text-sm mb-1">
-                <span>Amount</span>
-                <span className="font-medium">KES {formData.amount.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between text-sm mb-1">
-                <span>Frequency</span>
-                <span className="font-medium capitalize">{formData.frequency}</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span>Program</span>
-                <span className="font-medium">
-                  {programs.find((p) => p.value === formData.program)?.label}
-                </span>
+            <div className="rounded-2xl border bg-muted/30 p-5">
+              <p className="text-sm text-muted-foreground mb-2">
+                Donation Summary
+              </p>
+
+              <p className="text-3xl font-bold mb-4">
+                KES {formData.amount.toLocaleString()}
+              </p>
+
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground">Frequency</span>
+
+                  <span className="font-medium capitalize">
+                    {formData.frequency}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground">Program</span>
+
+                  <span className="font-medium">
+                    {programs.find((p) => p.value === formData.program)?.label}
+                  </span>
+                </div>
               </div>
             </div>
 
-            <div className="flex gap-4">
-              <Button variant="outline" onClick={() => setStep(1)} className="flex-1">
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button
+                variant="outline"
+                className="h-12 rounded-xl flex-1"
+                onClick={() => setStep(1)}
+              >
                 Back
               </Button>
-              <Button onClick={handleSubmit} className="flex-1" disabled={loading}>
+
+              <Button
+                className="h-12 rounded-xl flex-1"
+                onClick={handleSubmit}
+                disabled={loading}
+              >
                 {loading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -357,26 +519,66 @@ export function DonationForm({ onSubmit }: DonationFormProps) {
                 )}
               </Button>
             </div>
+
+            {/* Trust */}
+            <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground pt-2">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4" />
+                Secure Payments
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Smartphone className="h-4 w-4" />
+                M-Pesa Supported
+              </div>
+
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4" />
+                Instant Confirmation
+              </div>
+            </div>
           </div>
         )}
 
-        {/* Step 3: Confirmation */}
+        {/* STEP 3 */}
         {step === 3 && (
-          <div className="text-center py-8">
+          <div className="text-center py-10">
             <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
               <CheckCircle className="h-10 w-10 text-primary" />
             </div>
-            <h3 className="text-2xl font-bold text-foreground mb-2">Thank You!</h3>
-            <p className="text-muted-foreground mb-6">
-              Your donation of KES {formData.amount.toLocaleString()} has been received.
-              {formData.paymentMethod === "mpesa" && " Please check your phone to complete the M-Pesa payment."}
+
+            <h3 className="text-3xl font-bold mb-3">
+              Thank You for Your Support
+            </h3>
+
+            <p className="text-muted-foreground max-w-md mx-auto leading-relaxed mb-8">
+              Your contribution helps us continue supporting young athletes
+              through mentorship, education, and opportunity.
             </p>
+
+            <div className="rounded-2xl border bg-muted/30 p-5 max-w-sm mx-auto mb-8">
+              <p className="text-sm text-muted-foreground mb-2">
+                Donation Amount
+              </p>
+
+              <p className="text-3xl font-bold">
+                KES {formData.amount.toLocaleString()}
+              </p>
+            </div>
+
             <p className="text-sm text-muted-foreground mb-8">
-              A confirmation email has been sent to {formData.email}
+              A confirmation email has been sent to{" "}
+              <span className="font-medium text-foreground">
+                {formData.email}
+              </span>
             </p>
+
             <Button
+              variant="outline"
+              className="rounded-xl"
               onClick={() => {
-                setStep(1)
+                setStep(1);
+
                 setFormData({
                   amount: 1000,
                   frequency: "one-time",
@@ -386,15 +588,14 @@ export function DonationForm({ onSubmit }: DonationFormProps) {
                   email: "",
                   phone: "",
                   isAnonymous: false,
-                })
+                });
               }}
-              variant="outline"
             >
               Make Another Donation
             </Button>
           </div>
         )}
-      </CardContent>
-    </Card>
-  )
+      </div>
+    </div>
+  );
 }
