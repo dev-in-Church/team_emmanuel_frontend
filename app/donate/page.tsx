@@ -55,16 +55,19 @@ const trustIndicators = [
 ];
 
 const donationMethods = [
-  {
-    title: "M-Pesa Paybill",
-    details: ["Paybill Number: 522522", "Account: TEAMEMMANUEL"],
-  },
+  // {
+  //   title: "M-Pesa Paybill",
+  //   details: ["Paybill Number: 522522", "Account: TEAMEMMANUEL"],
+  // },
   {
     title: "Bank Transfer",
     details: [
-      "Bank: Equity Bank Kenya",
-      "Account Name: Team Emmanuel Foundation",
-      "Account Number: 012345678901",
+      // "Bank: Equity Bank Kenya",
+      "Account Number: 7770167698146",
+      "Account Name: Emmanuel Kipruto Bundotich",
+      "Bank Code: 68",
+      "Branch: 153",
+      "Swift Code: EQBLKENA",
     ],
   },
 ];
