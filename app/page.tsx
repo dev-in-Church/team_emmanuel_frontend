@@ -9,7 +9,7 @@ import { FloatingButtons } from "@/components/floating-buttons";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col">
       <Navigation />
       <main className="flex-1">
         <HeroSection />

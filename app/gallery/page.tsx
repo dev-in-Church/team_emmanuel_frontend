@@ -125,7 +125,7 @@ export default function GalleryPage() {
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="py-20 border-b border-border">
+        <section className="pt-34 py-20 border-b border-border">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl">
               <p className="text-primary font-semibold mb-2 uppercase tracking-wider text-sm">

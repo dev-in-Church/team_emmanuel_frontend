@@ -126,7 +126,7 @@ export default function ProgramsPage() {
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20">
+        <section className="pt-34 bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl">
               <p className="text-primary font-semibold mb-2 uppercase tracking-wider text-sm">

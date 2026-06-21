@@ -86,7 +86,7 @@ export default function DonatePage() {
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="py-20 border-b border-border bg-background">
+        <section className="pt-34 py-20 border-b border-border bg-background">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl">
               <span className="inline-block text-primary font-semibold mb-3 text-sm uppercase tracking-wider">
