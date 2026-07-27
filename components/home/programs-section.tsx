@@ -22,7 +22,7 @@ const programs = [
       "Providing running kits, shoes, and essential gear to young athletes who lack access to proper equipment.",
     color: "from-primary to-primary/80",
     bgColor: "bg-primary/5",
-    image: "/images/support.jpeg",
+    image: "/images/gallery/11.jpg",
   },
   {
     icon: GraduationCap,
@@ -40,7 +40,7 @@ const programs = [
       "Creating access to structured training, coaching guidance, and development opportunities for young runners.",
     color: "from-primary to-primary/80",
     bgColor: "bg-primary/5",
-    image: "/images/training.jpeg",
+    image: "/images/gallery/15.jpg",
   },
   {
     icon: Users,
@@ -49,7 +49,7 @@ const programs = [
       "Connecting young athletes with mentors who guide them in discipline, mindset, and life beyond sports.",
     color: "from-secondary to-secondary/80",
     bgColor: "bg-secondary/5",
-    image: "/images/mentorship.jpeg",
+    image: "/images/gallery/16.jpg",
   },
   {
     icon: Trophy,
@@ -58,16 +58,16 @@ const programs = [
       "Identifying and nurturing promising athletes, helping them grow their potential and pursue competitive opportunities.",
     color: "from-primary to-primary/80",
     bgColor: "bg-primary/5",
-    image: "/images/talent.jpeg",
+    image: "/images/gallery/14.jpg",
   },
   {
     icon: Sprout,
-    title: "Youth Empowerment",
+    title: "Empowerment",
     description:
       "Building confidence, discipline, and life skills through sports and education support programs.",
     color: "from-secondary to-secondary/80",
     bgColor: "bg-secondary/5",
-    image: "/images/youth.jpeg",
+    image: "/images/gallery/12.jpg",
   },
 ];
 

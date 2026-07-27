@@ -221,7 +221,7 @@ export function Footer() {
             {/* Donate Button */}
             <Button
               asChild
-              className="mt-6 w-full bg-secondary hover:bg-secondary/90 border-primary border-2 text-secondary-foreground rounded-full"
+              className="mt-6 w-full bg-secondary hover:bg-secondary/90 shadow-sm shadow-primary/20 text-secondary-foreground rounded-full"
             >
               <Link href="/donate">
                 Donate Now

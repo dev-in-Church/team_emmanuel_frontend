@@ -73,7 +73,7 @@ export function Navigation() {
   return (
     <>
       {/* Absolute Utility Bar - Layered over top of background content */}
-      <div className="absolute top-0 left-0 w-full h-10 hidden md:block z-50 bg-primary text-white border-b border-white/5">
+      <div className="absolute top-0 left-0 w-full h-10 hidden md:block z-50 bg-primary text-red-600 border-b border-white/5">
         <div className="container mx-auto px-8 max-w-7xl">
           <div className="flex items-center justify-between h-10 text-xs font-medium">
             <div className="flex items-center gap-6">
@@ -114,7 +114,7 @@ export function Navigation() {
           className={`mx-auto pointer-events-auto transition-all duration-500 ease-out border backdrop-blur-md rounded-full ${
             scrolled
               ? "max-w-5xl bg-background/85 shadow-[0_12px_40px_rgba(0,0,0,0.15)] border-border/40 px-5"
-              : "max-w-7xl bg-secondary shadow-none border-primary px-5 h-[60px] flex justify-between items-center"
+              : "max-w-7xl bg-secondary shadow-sm shadow-primary/40 border-0 px-5 h-[60px] flex justify-between items-center"
           }`}
         >
           <div
@@ -196,8 +196,8 @@ export function Navigation() {
                 size={scrolled ? "sm" : "default"}
                 className={`rounded-full px-5 transition-all duration-500 shadow-sm ${
                   scrolled
-                    ? "bg-white border border-primary text-secondary hover:bg-secondary hover:text-secondary-foreground h-8.5 text-xs"
-                    : "bg-primary hover:bg-primary/90 text-primary-foreground border border-transparent"
+                    ? "bg-white shadow-sm shadow-primary/20 text-secondary hover:bg-secondary hover:text-secondary-foreground h-8.5 text-xs"
+                    : "bg-secondary hover:bg-secondary/90 text-primary-foreground border border-transparent shadow-sm shadow-primary/20"
                 }`}
               >
                 <Link href="/donate">Donate Now</Link>

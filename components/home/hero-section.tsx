@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 const heroSlides = [
   {
-    image: "/images/hero.jpeg",
+    image: "/images/hero.jpg",
     title: "Empowering Young Athletes",
     subtitle: "Through Sports & Education",
   },
@@ -35,7 +35,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-foreground w-full">
+    <section className="relative h-[86vh] flex items-center overflow-hidden bg-foreground w-full">
       {/* Background Slides with subtle Ken Burns motion */}
       {heroSlides.map((slide, index) => (
         <div
@@ -73,14 +73,14 @@ export function HeroSection() {
               🏃‍♂️ Born To Run
             </div>
 
-            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold text-white tracking-tight leading-[1.10] text-balance">
+            <h1 className="text-4xl sm:text-5xl xl:text-3xl font-extrabold text-white tracking-tight leading-[1.10] text-balance">
               {heroSlides[currentSlide].title},{" "}
               <span className="text-primary block sm:inline">
                 {heroSlides[currentSlide].subtitle}
               </span>
             </h1>
 
-            <p className="text-md sm:text-lg text-white/80 leading-relaxed max-w-xl text-balance font-medium">
+            <p className="text-md sm:text-sm text-white/80 leading-relaxed max-w-xl text-balance font-medium">
               Based in Iten, Kenya 'the home of champions', Team Emmanuel
               Foundation partners directly with aspiring youth. We provide elite
               training gear, educational support, and professional mentorship to
@@ -119,7 +119,7 @@ export function HeroSection() {
 
           {/* Right Preview Frame Card */}
           <div className="lg:col-span-5 hidden lg:block relative">
-            <div className="relative mx-auto max-w-sm aspect-[4/4] rounded-sm overflow-hidden border border-white/10 shadow-2xl group/card">
+            <div className="relative mx-auto max-w-sm aspect-[16/12] rounded-sm overflow-hidden border border-white/10 shadow-2xl group/card">
               <Image
                 src={heroSlides[(currentSlide + 1) % heroSlides.length].image}
                 alt="Community preview"
