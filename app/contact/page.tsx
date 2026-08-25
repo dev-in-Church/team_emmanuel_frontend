@@ -23,9 +23,13 @@ import {
   Instagram,
   Youtube,
   Send,
+  Loader2,
+  CheckCircle,
+  AlertCircle,
 } from "lucide-react";
 
 import { useState } from "react";
+import api from "@/lib/api";
 
 const contactInfo = [
   {
@@ -51,22 +55,19 @@ const contactInfo = [
 ];
 
 const socialLinks = [
-  {
-    icon: Facebook,
-    href: "#",
-    label: "Facebook",
-  },
-  {
-    icon: Instagram,
-    href: "#",
-    label: "Instagram",
-  },
-  {
-    icon: Youtube,
-    href: "#",
-    label: "Youtube",
-  },
+  { icon: Facebook, href: "#", label: "Facebook" },
+  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Youtube, href: "#", label: "Youtube" },
 ];
+
+const subjectLabels: Record<string, string> = {
+  general: "General Inquiry",
+  support: "Athlete Support",
+  volunteer: "Volunteer",
+  partnership: "Partnership",
+  media: "Media Inquiry",
+  other: "Other",
+};
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -76,13 +77,40 @@ export default function ContactPage() {
     subject: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    setStatus(null);
 
-    console.log(formData);
+    const result = await api.submitContactForm({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      subject: subjectLabels[formData.subject] || "General Inquiry",
+      message: formData.message,
+    });
 
-    alert("Thank you for reaching out. We will get back to you soon.");
+    setLoading(false);
+
+    if (result.error) {
+      setStatus({
+        type: "error",
+        text: result.error || "Something went wrong. Please try again.",
+      });
+      return;
+    }
+
+    setStatus({
+      type: "success",
+      text: "Thank you for reaching out. We will get back to you soon.",
+    });
+    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
   };
 
   return (
@@ -187,6 +215,23 @@ export default function ContactPage() {
                       soon as possible.
                     </p>
                   </div>
+
+                  {status && (
+                    <div
+                      className={`mb-6 flex items-center gap-2 rounded-sm p-4 text-sm ${
+                        status.type === "success"
+                          ? "bg-primary/10 text-primary"
+                          : "bg-destructive/10 text-destructive"
+                      }`}
+                    >
+                      {status.type === "success" ? (
+                        <CheckCircle className="h-5 w-5 shrink-0" />
+                      ) : (
+                        <AlertCircle className="h-5 w-5 shrink-0" />
+                      )}
+                      <span>{status.text}</span>
+                    </div>
+                  )}
 
                   <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                     <div className="grid sm:grid-cols-2 gap-6">
@@ -304,10 +349,20 @@ export default function ContactPage() {
                     <Button
                       type="submit"
                       size="lg"
+                      disabled={loading}
                       className="w-full sm:w-fit bg-primary hover:bg-primary/90 text-primary-foreground"
                     >
-                      Send Message
-                      <Send className="ml-2 h-4 w-4" />
+                      {loading ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          Send Message
+                          <Send className="ml-2 h-4 w-4" />
+                        </>
+                      )}
                     </Button>
                   </form>
                 </div>
@@ -336,6 +391,7 @@ export default function ContactPage() {
 
             <div className="overflow-hidden rounded-sm border border-border">
               <iframe
+                title="Team Emmanuel Foundation location map"
                 src="https://www.google.com/maps?q=Eldoret,Kenya&output=embed"
                 width="100%"
                 height="500"

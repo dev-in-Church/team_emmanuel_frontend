@@ -73,7 +73,7 @@ export function Navigation() {
   return (
     <>
       {/* Absolute Utility Bar - Layered over top of background content */}
-      <div className="absolute top-0 left-0 w-full h-10 hidden md:block z-50 bg-primary text-red-600 border-b border-white/5">
+      {/* <div className="absolute top-0 left-0 w-full h-8 hidden md:block z-50 bg-primary text-red-600 border-b border-white/5">
         <div className="container mx-auto px-8 max-w-7xl">
           <div className="flex items-center justify-between h-10 text-xs font-medium">
             <div className="flex items-center gap-6">
@@ -102,23 +102,26 @@ export function Navigation() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Sticky Floating Header — Placed to overlap cleanly */}
       <header
-        className={`fixed left-0 w-full z-50 transition-all duration-500 ease-out px-4 sm:px-6 pointer-events-none ${
-          scrolled ? "top-3" : "top-3 md:top-13"
-        }`}
+        className={`fixed left-0 w-full z-50 transition-all duration-500 ease-out pointer-events-none `}
+        // ${
+        //   scrolled ? "top-3" : "top-3 md:top-13"
+        // }
       >
         <nav
-          className={`mx-auto pointer-events-auto transition-all duration-500 ease-out border backdrop-blur-md rounded-full ${
+          className={`mx-0 pointer-events-auto transition-all duration-500 ease-out border backdrop-blur-md h-[60px]  flex justify-between items-center w-full ${
             scrolled
-              ? "max-w-5xl bg-background/85 shadow-[0_12px_40px_rgba(0,0,0,0.15)] border-border/40 px-5"
-              : "max-w-7xl bg-secondary shadow-sm shadow-primary/40 border-0 px-5 h-[60px] flex justify-between items-center"
+              ? "bg-background/85 shadow-[0_12px_40px_primary] border-border/40 px-5"
+              : "bg-secondary shadow-sm shadow-primary/40 border-0 px-5"
           }`}
         >
           <div
-            className={`flex items-center justify-between w-full transition-all duration-500 ease-out ${scrolled ? "h-14" : "h-20"}`}
+            className={`flex items-center justify-between w-full transition-all duration-500 ease-out `}
+
+            // ${scrolled ? "h-14" : "h-20"}
           >
             {/* Logo Group */}
             <Link
@@ -126,7 +129,7 @@ export function Navigation() {
               className="flex items-center gap-3 group shrink-0 pl-1"
             >
               <img
-                src="/images/logo.webp"
+                src="/images/logo.png"
                 alt="Team Emmanuel Foundation"
                 className={`w-auto object-contain transition-all duration-500 ease-out ${
                   scrolled ? "h-9" : "h-9"
@@ -156,7 +159,7 @@ export function Navigation() {
             <div
               className={`hidden lg:flex items-center gap-1 p-1 rounded-full border transition-colors duration-500 ${
                 scrolled
-                  ? "bg-muted/20 border-border/5"
+                  ? "bg-muted/20 border-border/5 shadow-xs shadow-primary"
                   : "bg-white/5 border-white/5"
               }`}
             >
@@ -177,13 +180,26 @@ export function Navigation() {
 
             {/* Right Side Call to Action */}
             <div className="hidden md:flex items-center gap-4 pr-1">
-              {scrolled && (
+              {scrolled ? (
                 <div className="flex items-center gap-2 mr-1 animate-fade-in">
                   {socialLinks.map((link) => (
                     <a
                       key={link.label}
                       href={link.href}
                       className="text-muted-foreground/70 hover:text-primary transition-colors p-1"
+                      aria-label={link.label}
+                    >
+                      <link.icon className="h-3.5 w-3.5" />
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 mr-1 animate-fade-in">
+                  {socialLinks.map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      className="text-white hover:text-primary transition-colors p-1"
                       aria-label={link.label}
                     >
                       <link.icon className="h-3.5 w-3.5" />
@@ -197,7 +213,7 @@ export function Navigation() {
                 className={`rounded-full px-5 transition-all duration-500 shadow-sm ${
                   scrolled
                     ? "bg-white shadow-sm shadow-primary/20 text-secondary hover:bg-secondary hover:text-secondary-foreground h-8.5 text-xs"
-                    : "bg-secondary hover:bg-secondary/90 text-primary-foreground border border-transparent shadow-sm shadow-primary/20"
+                    : "bg-primary hover:bg-secondary/90 text-primary-foreground border border-transparent shadow-sm shadow-primary/20"
                 }`}
               >
                 <Link href="/donate">Donate Now</Link>
@@ -235,7 +251,7 @@ export function Navigation() {
             onClick={() => setMobileMenuOpen(false)}
           >
             <Image
-              src="/images/logo.webp"
+              src="/images/logo.png"
               alt="Team Emmanuel Foundation"
               width={36}
               height={36}

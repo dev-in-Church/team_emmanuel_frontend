@@ -106,7 +106,7 @@ export function Footer() {
             <div className="flex items-center gap-3 mb-6">
               <div className="bg-background rounded-full p-2">
                 <img
-                  src="/images/logo.webp"
+                  src="/images/logo.png"
                   alt=""
                   className="h-18 w-18 object-contain"
                 />
