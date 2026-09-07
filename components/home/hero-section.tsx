@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 const heroImages = [
   "/images/hero.jpg",
-  "/images/hero2.jpg",
+  "/images/gallery/52.jpg",
   "/images/hero3.jpeg",
 ];
 
