@@ -23,7 +23,7 @@ const programs = [
     title: "Athlete Support",
     description:
       "We provide young athletes with essential running kits, shoes, and training gear that help them train with confidence and consistency.",
-    image: "/images/gallery/1.jpg",
+    image: "/images/gallery/11.jpg",
     features: [
       "Running shoes and kits distribution",
       "Training apparel support",
@@ -38,7 +38,7 @@ const programs = [
     title: "Education Support",
     description:
       "We help student-athletes stay focused in school by supporting educational needs that directly affect their progress.",
-    image: "/images/gallery/1.jpg",
+    image: "/images/gallery/12.jpg",
     features: [
       "School fees assistance",
       "School uniforms and supplies",
@@ -53,7 +53,7 @@ const programs = [
     title: "Training & Development",
     description:
       "We encourage structured training, discipline, and continuous improvement for young athletes working toward their goals.",
-    image: "/images/gallery/1.jpg",
+    image: "/images/gallery/15.jpg",
     features: [
       "Structured training support",
       "Athlete development opportunities",
@@ -68,7 +68,7 @@ const programs = [
     title: "Mentorship & Guidance",
     description:
       "We connect young athletes with mentorship that encourages focus, discipline, confidence, and personal growth.",
-    image: "/images/gallery/1.jpg",
+    image: "/images/gallery/16.jpg",
     features: [
       "Athlete mentorship sessions",
       "Guidance on discipline and mindset",
@@ -83,7 +83,7 @@ const programs = [
     title: "Talent Development",
     description:
       "We help identify and nurture young athletes with potential by creating opportunities for growth and exposure.",
-    image: "/images/gallery/1.jpg",
+    image: "/images/gallery/14.jpg",
     features: [
       "Supporting emerging talent",
       "Encouraging competitive growth",
@@ -98,7 +98,7 @@ const programs = [
     title: "Youth Empowerment",
     description:
       "Beyond athletics, we focus on helping young people build discipline, confidence, and a positive mindset for life.",
-    image: "/images/gallery/1.jpg",
+    image: "/images/gallery/52.jpg",
     features: [
       "Confidence-building initiatives",
       "Encouraging discipline and responsibility",
