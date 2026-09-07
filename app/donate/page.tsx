@@ -321,7 +321,7 @@ export default function DonatePage() {
               Ready to make a difference?
             </h2>
             <p className="text-primary-foreground/80 text-sm mb-8 max-w-lg mx-auto">
-              It only takes a minute — choose an amount and complete your
+              It only takes a minute - choose an amount and complete your
               donation securely.
             </p>
             <Button
