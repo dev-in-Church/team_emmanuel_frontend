@@ -3,43 +3,41 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Film, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 
-const heroSlides = [
-  {
-    image: "/images/hero.jpg",
-    title: "Empowering Young Athletes",
-    subtitle: "Through Sports & Education",
-  },
-  {
-    image: "/images/hero2.jpg",
-    title: "Unlocking Potential",
-    subtitle: "Support. Train. Succeed.",
-  },
-  {
-    image: "/images/hero3.jpeg",
-    title: "Building Future Champions",
-    subtitle: "On the Track and in School",
-  },
+const heroImages = [
+  "/images/hero.jpg",
+  "/images/hero2.jpg",
+  "/images/hero3.jpeg",
 ];
+
+const SLIDE_DURATION = 6000;
 
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
+    if (paused) return;
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 6000);
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+    }, SLIDE_DURATION);
     return () => clearInterval(timer);
-  }, []);
+  }, [paused]);
 
   return (
-    <section className="relative h-[100vh] flex items-center overflow-hidden bg-foreground w-full">
+    <section
+      className="relative h-[80dvh] min-h-[500px] max-h-[720px] flex items-center overflow-hidden bg-neutral-950 w-full"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+    >
       {/* Background Slides with subtle Ken Burns motion */}
-      {heroSlides.map((slide, index) => (
+      {heroImages.map((image, index) => (
         <div
-          key={slide.image}
+          key={image}
           className={`absolute inset-0 transition-all duration-1000 ${
             index === currentSlide
               ? "opacity-35 scale-100"
@@ -47,168 +45,118 @@ export function HeroSection() {
           }`}
         >
           <Image
-            src={slide.image}
-            alt={slide.title}
+            src={image}
+            alt=""
             fill
-            loading="eager"
             className="object-cover object-center"
             priority={index === 0}
+            loading={index === 0 ? "eager" : "lazy"}
           />
         </div>
       ))}
 
-      {/* Cinematic Deep Vignettes */}
-      <div className="absolute inset-0 bg-gradient-to-r from-foreground via-foreground/10 to-transparent opacity-95" />
-      <div className="absolute inset-0 bg-gradient-to-t from-foreground via-transparent to-transparent opacity-20" />
+      {/* Cinematic Deep Vignettes — fixed dark overlay, independent of theme */}
+      <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/60 via-neutral-950/35 to-neutral-950/60" />
 
       {/* Ambient Lighting Background Layer */}
-      <div className="absolute top-24 left-12 w-80 h-80 bg-primary/10 rounded-full blur-[120px] opacity-50 pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[32rem] h-[32rem] bg-primary/15 rounded-full blur-[130px] opacity-70 pointer-events-none" />
 
-      {/* Main Content Layout — Integrated top padding buffers space for header overlay */}
-      <div className="container mx-auto px-6 pt-32 pb-20 lg:pt-40 lg:pb-28 relative z-10 max-w-7xl">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Text Column */}
-          <div className="lg:col-span-7 flex flex-col items-start space-y-6">
-            {/* <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10 text-white text-[11px] font-bold tracking-widest uppercase">
-              🏃‍♂️ Born To Run
-            </div> */}
-
-            <h1 className="text-4xl sm:text-5xl xl:text-3xl font-extrabold text-white tracking-tight leading-[1.10] text-balance">
-              {/* {heroSlides[currentSlide].title},{" "} */}
-              Empowering Young Athletes <br />
-              <span className="text-primary block sm:inline">
-                {/* {heroSlides[currentSlide].subtitle} */}
-                Through Sports & Education
-              </span>
-            </h1>
-
-            <p className="text-md sm:text-sm text-white/80 leading-relaxed max-w-xl text-balance font-medium">
-              Based in Iten, Kenya 'the home of champions', Team Emmanuel
-              Foundation partners directly with aspiring youth. We provide elite
-              training gear, educational support, and professional mentorship to
-              turn raw discipline into life-changing opportunity.
-            </p>
-
-            <div className="pt-2 flex flex-wrap gap-4">
-              <Button
-                asChild
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-full px-8 py-6 shadow-lg shadow-primary/20 transition-all duration-300 group"
-              >
-                <Link href="/programs">
-                  Our Programs
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
-            </div>
-
-            {/* Custom Carousel Dots */}
-            <div className="flex items-center gap-2.5 pt-6">
-              {heroSlides.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`h-1 rounded-full transition-all duration-500 ease-out ${
-                    index === currentSlide
-                      ? "w-12 bg-primary"
-                      : "w-3 bg-white/20 hover:bg-white/40"
-                  }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
+      {/* Main Content Layout — centered */}
+      <div className="container mx-auto px-6 pt-28 pb-16 relative z-10 max-w-7xl">
+        <div className="flex flex-col items-center text-center max-w-2xl mx-auto space-y-5">
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10 text-white text-[11px] font-bold tracking-widest uppercase">
+            Team Emmanuel Foundation
           </div>
 
-          {/* Right Preview Frame Card */}
-          {/* <div className="lg:col-span-5 hidden lg:block relative">
-            <div className="relative mx-auto max-w-sm aspect-[16/12] rounded-sm overflow-hidden border border-white/10 shadow-2xl group/card">
-              <Image
-                src={heroSlides[(currentSlide + 1) % heroSlides.length].image}
-                alt="Community preview"
-                fill
-                className="object-cover transition-transform duration-700 group-hover/card:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-white tracking-tight leading-[1.15] text-balance">
+            Empowering Young Athletes{" "}
+            <span className="text-primary block sm:inline">
+              Through Sports & Education
+            </span>
+          </h1>
 
-              <div className="absolute bottom-6 left-6 right-6 backdrop-blur-md bg-white/10 border border-white/10 p-4 rounded-sm flex items-center justify-between">
-                <div>
-                  <p className="text-white font-bold text-xs">See our impact</p>
-                  <p className="text-white/60 text-[10px]">
-                    Watch gallery highlights
-                  </p>
-                </div>
-                <Link
-                  href="/gallery"
-                  className="w-10 h-10  flex items-center justify-center text-primary-foreground shadow transition-transform hover:scale-105"
-                >
-                  <Film className="h-10 w-10 fill-primary text-white ml-0.5" />
-                </Link>
-              </div>
-            </div>
-          </div> */}
+          <p className="text-sm sm:text-base text-white/75 leading-relaxed max-w-xl text-balance font-medium">
+            Based in Iten, Kenya &mdash; &ldquo;the home of champions&rdquo;
+            &mdash; Team Emmanuel Foundation partners directly with aspiring
+            youth. We provide elite training gear, educational support, and
+            professional mentorship to turn raw discipline into life-changing
+            opportunity.
+          </p>
+
+          <div className="pt-2 flex flex-wrap justify-center gap-4">
+            <Button
+              asChild
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-full px-8 py-6 shadow-lg shadow-primary/20 transition-all duration-300 group"
+            >
+              <Link href="/programs">
+                Our Programs
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="rounded-full px-8 py-6 border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white backdrop-blur-md font-bold transition-all duration-300"
+            >
+              <Link href="/donate">Donate Now</Link>
+            </Button>
+          </div>
+
+          {/* Custom Carousel Dots */}
+          <div
+            className="flex items-center justify-center gap-2.5 pt-4"
+            role="tablist"
+            aria-label="Hero background images"
+          >
+            {heroImages.map((image, index) => (
+              <button
+                key={image}
+                onClick={() => setCurrentSlide(index)}
+                role="tab"
+                aria-selected={index === currentSlide}
+                className={`h-1 rounded-full transition-all duration-500 ease-out ${
+                  index === currentSlide
+                    ? "w-12 bg-primary"
+                    : "w-3 bg-white/20 hover:bg-white/40"
+                }`}
+                aria-label={`Show background ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
-      {/* Bottom shape */}
-      <div className="absolute inset-x-0 bottom-0">
-        {/* Back layer */}
+
+      {/* Bottom wave — layered, gradient-filled */}
+      <div className="absolute inset-x-0 bottom-0 pointer-events-none">
         <svg
-          className="absolute bottom-0 h-[210px] w-full"
-          viewBox="0 0 1440 210"
+          className="block w-full h-[140px] sm:h-[180px]"
+          viewBox="0 0 1440 200"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            <pattern
-              id="backPattern"
-              width="80"
-              height="80"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                d="M-20 60 C20 20 60 100 100 60"
-                fill="none"
-                stroke="#0e5420"
-                strokeWidth="2"
-                opacity="0.12"
+            <linearGradient id="waveGradientBack" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.12" />
+              <stop
+                offset="50%"
+                stopColor="var(--primary)"
+                stopOpacity="0.22"
               />
-            </pattern>
-          </defs>
-
-          {/* Back wave */}
-          <path
-            d="
-        M0 110
-        C240 190 400 170 600 125
-        C850 70 1050 120 1440 55
-        L1440 210
-        L0 210
-        Z
-      "
-            fill="#D8F0DD"
-          />
-
-          {/* Pattern */}
-          <path
-            d="
-        M0 110
-        C240 190 400 170 600 125
-        C850 70 1050 120 1440 55
-        L1440 210
-        L0 210
-        Z
-      "
-            fill="url(#backPattern)"
-          />
-        </svg>
-
-        {/* Front layer */}
-        <svg
-          className="relative block h-[170px] w-full"
-          viewBox="0 0 1440 170"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
+              <stop
+                offset="100%"
+                stopColor="var(--primary)"
+                stopOpacity="0.12"
+              />
+            </linearGradient>
+            <linearGradient id="waveGradientFront" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="var(--primary)" />
+              <stop
+                offset="100%"
+                stopColor="color-mix(in oklch, var(--primary), black 25%)"
+              />
+            </linearGradient>
             <pattern
               id="frontPattern"
               width="70"
@@ -216,9 +164,7 @@ export function HeroSection() {
               patternUnits="userSpaceOnUse"
             >
               <circle cx="10" cy="10" r="2" fill="white" opacity="0.12" />
-
               <circle cx="45" cy="40" r="1.5" fill="white" opacity="0.08" />
-
               <path
                 d="M0 70 L70 0"
                 stroke="white"
@@ -228,31 +174,19 @@ export function HeroSection() {
             </pattern>
           </defs>
 
-          {/* Front wave */}
+          {/* Back wave — soft, translucent */}
           <path
-            d="
-        M0 85
-        C200 140 370 145 570 100
-        C780 50 930 45 1120 80
-        C1250 105 1350 110 1440 75
-        L1440 170
-        L0 170
-        Z
-      "
-            fill="#0e5420"
+            d="M0 130 C220 90 380 170 620 140 C860 110 1040 60 1440 100 L1440 200 L0 200 Z"
+            fill="url(#waveGradientBack)"
           />
 
-          {/* Pattern overlay */}
+          {/* Front wave — solid gradient with subtle pattern */}
           <path
-            d="
-        M0 85
-        C200 140 370 145 570 100
-        C780 50 930 45 1120 80
-        C1250 105 1350 110 1440 75
-        L1440 170
-        L0 170
-        Z
-      "
+            d="M0 150 C240 110 420 190 680 160 C940 130 1160 90 1440 130 L1440 200 L0 200 Z"
+            fill="url(#waveGradientFront)"
+          />
+          <path
+            d="M0 150 C240 110 420 190 680 160 C940 130 1160 90 1440 130 L1440 200 L0 200 Z"
             fill="url(#frontPattern)"
           />
         </svg>

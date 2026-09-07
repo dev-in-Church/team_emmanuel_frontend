@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Menu,
   X,
@@ -15,16 +15,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const topBarLinks = [
-  { icon: Phone, text: "+254 726 147 243", href: "tel:+254726147243" },
-  {
-    icon: Mail,
-    text: "info@teamemmanuel.org",
-    href: "mailto:info@teamemmanuel.org",
-  },
-  { icon: MapPin, text: "Iten, Kenya", href: "#" },
-];
-
 const socialLinks = [
   {
     icon: Facebook,
@@ -33,7 +23,7 @@ const socialLinks = [
   },
   {
     icon: Instagram,
-    href: "https://www.instagram.com/emmanuelbundotich?igsh=MTkzNTFxajhiNDV5dA==",
+    href: "https://www.instagram.com/teamemmanuelfoundation/",
     label: "Instagram",
   },
 ];
@@ -43,13 +33,14 @@ const mainNavLinks = [
   { text: "About Us", href: "/about" },
   { text: "Programs", href: "/programs" },
   { text: "Gallery", href: "/gallery" },
-  { text: "News", href: "/news" },
   { text: "Contact", href: "/contact" },
 ];
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,70 +61,77 @@ export function Navigation() {
     };
   }, [mobileMenuOpen]);
 
+  // Escape key closes the mobile sidebar
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
+
+  // Basic focus trap for the mobile sidebar
+  useEffect(() => {
+    if (!mobileMenuOpen || !sidebarRef.current) return;
+
+    const focusableSelector =
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    const container = sidebarRef.current;
+    const focusableEls =
+      container.querySelectorAll<HTMLElement>(focusableSelector);
+    const firstEl = focusableEls[0];
+    const lastEl = focusableEls[focusableEls.length - 1];
+
+    firstEl?.focus();
+
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      if (focusableEls.length === 0) return;
+
+      if (e.shiftKey && document.activeElement === firstEl) {
+        e.preventDefault();
+        lastEl.focus();
+      } else if (!e.shiftKey && document.activeElement === lastEl) {
+        e.preventDefault();
+        firstEl.focus();
+      }
+    };
+
+    container.addEventListener("keydown", handleTab);
+    return () => container.removeEventListener("keydown", handleTab);
+  }, [mobileMenuOpen]);
+
   return (
     <>
-      {/* Absolute Utility Bar - Layered over top of background content */}
-      {/* <div className="absolute top-0 left-0 w-full h-8 hidden md:block z-50 bg-primary text-red-600 border-b border-white/5">
-        <div className="container mx-auto px-8 max-w-7xl">
-          <div className="flex items-center justify-between h-10 text-xs font-medium">
-            <div className="flex items-center gap-6">
-              {topBarLinks.map((link) => (
-                <a
-                  key={link.text}
-                  href={link.href}
-                  className="flex items-center gap-2 text-white/90 hover:text-white transition-colors duration-200"
-                >
-                  <link.icon className="h-3.5 w-3.5 opacity-80" />
-                  <span>{link.text}</span>
-                </a>
-              ))}
-            </div>
-            <div className="flex items-center gap-4">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-white/80 hover:text-white transition-all duration-200 hover:scale-110 p-1"
-                  aria-label={link.label}
-                >
-                  <link.icon className="h-3.5 w-3.5" />
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-      {/* Sticky Floating Header — Placed to overlap cleanly */}
-      <header
-        className={`fixed left-0 w-full z-50 transition-all duration-500 ease-out pointer-events-none `}
-        // ${
-        //   scrolled ? "top-3" : "top-3 md:top-13"
-        // }
-      >
+      <header className="fixed left-0 w-full z-50 transition-all duration-500 ease-out pointer-events-none">
         <nav
-          className={`mx-0 pointer-events-auto transition-all duration-500 ease-out border backdrop-blur-md h-[60px]  flex justify-between items-center w-full ${
+          className={`mx-0 pointer-events-auto transition-all duration-500 ease-out backdrop-blur-md h-[60px] flex justify-between items-center w-full ${
             scrolled
-              ? "bg-background/85 shadow-[0_12px_40px_primary] border-border/40 px-5"
-              : "bg-secondary shadow-sm shadow-primary/40 border-0 px-5"
+              ? "bg-background/85 shadow-[0_12px_40px_oklch(0.39_0.11_147_/_0.15)] border-border/40 px-5"
+              : "bg-transparent px-5"
           }`}
         >
-          <div
-            className={`flex items-center justify-between w-full transition-all duration-500 ease-out `}
-
-            // ${scrolled ? "h-14" : "h-20"}
-          >
+          <div className="flex items-center justify-between w-full transition-all duration-500 ease-out">
             {/* Logo Group */}
             <Link
               href="/"
               className="flex items-center gap-3 group shrink-0 pl-1"
             >
-              <img
+              <Image
                 src="/images/logo.png"
                 alt="Team Emmanuel Foundation"
-                className={`w-auto object-contain transition-all duration-500 ease-out ${
-                  scrolled ? "h-9" : "h-9"
-                } ${!scrolled && "brightness-0 invert" /* Keeps logo white on dark transparent background */}`}
+                width={36}
+                height={36}
+                className={`h-9 w-auto object-contain transition-all duration-500 ease-out ${
+                  !scrolled &&
+                  "brightness-0 invert" /* Keeps logo white on dark transparent background */
+                }`}
               />
               <div className="hidden sm:block">
                 <h1
@@ -180,33 +178,22 @@ export function Navigation() {
 
             {/* Right Side Call to Action */}
             <div className="hidden md:flex items-center gap-4 pr-1">
-              {scrolled ? (
-                <div className="flex items-center gap-2 mr-1 animate-fade-in">
-                  {socialLinks.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      className="text-muted-foreground/70 hover:text-primary transition-colors p-1"
-                      aria-label={link.label}
-                    >
-                      <link.icon className="h-3.5 w-3.5" />
-                    </a>
-                  ))}
-                </div>
-              ) : (
-                <div className="flex items-center gap-2 mr-1 animate-fade-in">
-                  {socialLinks.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      className="text-white hover:text-primary transition-colors p-1"
-                      aria-label={link.label}
-                    >
-                      <link.icon className="h-3.5 w-3.5" />
-                    </a>
-                  ))}
-                </div>
-              )}
+              <div className="flex items-center gap-2 mr-1 animate-fade-in">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className={`transition-colors p-1 ${
+                      scrolled
+                        ? "text-muted-foreground/70 hover:text-primary"
+                        : "text-white hover:text-primary"
+                    }`}
+                    aria-label={link.label}
+                  >
+                    <link.icon className="h-3.5 w-3.5" />
+                  </a>
+                ))}
+              </div>
               <Button
                 asChild
                 size={scrolled ? "sm" : "default"}
@@ -222,6 +209,7 @@ export function Navigation() {
 
             {/* Mobile Menu Trigger */}
             <button
+              ref={menuButtonRef}
               className={`lg:hidden mr-1 p-2.5 rounded-full transition-colors focus:outline-none ${
                 scrolled
                   ? "hover:bg-muted text-foreground/80"
@@ -229,6 +217,8 @@ export function Navigation() {
               }`}
               onClick={() => setMobileMenuOpen(true)}
               aria-label="Open menu"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               <Menu className="h-5 w-5" />
             </button>
@@ -236,12 +226,18 @@ export function Navigation() {
         </nav>
       </header>
 
-      {/* Mobile Sidebar (Keeps original content intact) */}
+      {/* Mobile Sidebar */}
       <div
         className={`fixed inset-0 bg-foreground/20 backdrop-blur-md z-50 transition-opacity duration-300 lg:hidden ${mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         onClick={() => setMobileMenuOpen(false)}
+        aria-hidden="true"
       />
       <div
+        id="mobile-menu"
+        ref={sidebarRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
         className={`fixed top-0 right-0 h-full w-full max-w-sm bg-background z-50 transform transition-transform duration-400 ease-out lg:hidden shadow-2xl flex flex-col border-l border-border/40 ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex items-center justify-between p-5 border-b border-border/60">
@@ -264,6 +260,7 @@ export function Navigation() {
           <button
             className="p-2 hover:bg-muted rounded-full transition-colors text-muted-foreground hover:text-foreground"
             onClick={() => setMobileMenuOpen(false)}
+            aria-label="Close menu"
           >
             <X className="h-5 w-5" />
           </button>
@@ -301,6 +298,7 @@ export function Navigation() {
               <Phone className="h-4 w-4 text-muted-foreground/50" />
               <span>+254 726 147 243</span>
             </a>
+
             <a
               href="mailto:info@teamemmanuel.org"
               className="flex items-center gap-3 hover:text-primary transition-colors duration-200"

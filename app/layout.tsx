@@ -7,7 +7,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Team Emmanuel Foundation - Empowering Communities",
+  title: "Team Emmanuel Foundation - Empowering Young Athletes",
   description:
     "Team Emmanuel Foundation is dedicated to empowering communities through education, healthcare, and sustainable development programs.",
 

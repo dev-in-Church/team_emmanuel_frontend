@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Quote, Star, CheckCircle2 } from "lucide-react";
+import { Quote, Star, ArrowRight } from "lucide-react";
 
 const testimonials = [
   {
     quote:
-      "Before joining Team Emmanuel, I didn’t have proper running shoes. Now I train with confidence and I’m chasing my goals both in school and on the track.",
+      "Before joining Team Emmanuel, I didn't have proper running shoes. Now I train with confidence and I'm chasing my goals both in school and on the track.",
     name: "Daniel Kiptoo",
     role: "Student Athlete",
     image: "/user.png",
@@ -29,114 +29,111 @@ const testimonials = [
     rating: 5,
   },
 ];
-const achievements = [
-  "200+ young athletes supported with running kits",
-  "100+ students assisted with school fees and uniforms",
-  "Active training and mentorship programs for youth",
-  "Growing community of disciplined and focused athletes",
+
+const stats = [
+  { value: "200+", label: "Athletes supported with running kits" },
+  { value: "100+", label: "Students assisted with fees & uniforms" },
+  { value: "12", label: "Active training & mentorship programs" },
+  { value: "6", label: "Years building this community" },
 ];
 
 export function ImpactSection() {
   return (
-    <section className="py-10 bg-background relative overflow-hidden">
+    <section className="py-10 lg:py-14 bg-background relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="absolute top-1/4 -right-20 w-80 h-80 rounded-full bg-primary blur-3xl" />
-        <div className="absolute bottom-1/4 -left-20 w-80 h-80 rounded-full bg-secondary blur-3xl" />
+        <div className="absolute bottom-1/4 -left-20 w-80 h-80 rounded-full bg-primary blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Content */}
-          <div>
-            <span className="inline-block text-primary font-semibold mb-3 text-sm uppercase tracking-wider">
-              Our Impact
-            </span>
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
+        {/* Header */}
+        <div className="text-center max-w-xl mx-auto mb-10">
+          <span className="inline-block text-primary font-semibold mb-2 text-xs uppercase tracking-wider">
+            Our Impact
+          </span>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 text-balance">
+            Real Progress. Real Stories.
+          </h2>
+          <p className="text-muted-foreground text-sm leading-relaxed">
+            Every step forward matters — from a first pair of running shoes to
+            staying in school and building discipline for life.
+          </p>
+        </div>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-              Real Progress. Real Stories.
-            </h2>
-
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-              Every step forward matters. From athletes receiving their first
-              pair of running shoes to staying in school and building
-              discipline, our work is reflected in real progress. These are the
-              stories of young people pushing forward with the right support
-              behind them.
-            </p>
-
-            {/* Achievements List */}
-            <div className="space-y-4 mb-8">
-              {achievements.map((achievement, index) => (
-                <div key={index} className="flex items-start gap-3">
-                  <CheckCircle2 className="h-6 w-6 text-primary shrink-0 mt-0.5" />
-                  <span className="text-foreground font-medium">
-                    {achievement}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <Button
-              asChild
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
+        {/* Stats Strip */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-2xl border border-border/60 bg-muted/30 p-5 text-center hover:border-primary/40 hover:bg-primary/5 transition-colors"
             >
-              <Link href="/about">Learn More About Us</Link>
-            </Button>
-          </div>
+              <p className="text-3xl md:text-4xl font-extrabold text-primary mb-1">
+                {stat.value}
+              </p>
+              <p className="text-xs md:text-sm text-muted-foreground leading-snug">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
 
-          {/* Testimonials */}
-          <div className="flex flex-col gap-6">
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={testimonial.name}
-                className={`relative p-6 rounded-sm transition-all hover:shadow-lg ${
-                  index % 2 === 0
-                    ? "bg-gradient-to-br from-primary/5 to-primary/10 border-l-4 border-primary"
-                    : "bg-gradient-to-br from-secondary/5 to-secondary/10 border-l-4 border-secondary"
-                }`}
-              >
-                {/* Quote Icon */}
-                <Quote
-                  className={`absolute top-4 right-4 h-10 w-10 ${index % 2 === 0 ? "text-primary/10" : "text-secondary/10"}`}
-                />
+        {/* Testimonials */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {testimonials.map((testimonial) => (
+            <div
+              key={testimonial.name}
+              className="relative flex flex-col p-6 rounded-2xl bg-muted/30 border border-border/60 hover:border-primary/40 hover:shadow-lg transition-all"
+            >
+              <Quote className="absolute top-5 right-5 h-9 w-9 text-primary/10" />
 
-                {/* Rating */}
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="h-4 w-4 fill-yellow-400 text-yellow-400"
-                    />
-                  ))}
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                  />
+                ))}
+              </div>
+
+              <p className="text-foreground leading-relaxed mb-6 relative z-10 flex-1">
+                &quot;{testimonial.quote}&quot;
+              </p>
+
+              <div className="flex items-center gap-4 pt-4 border-t border-border/60">
+                <div className="relative w-11 h-11 rounded-full overflow-hidden ring-2 ring-background shadow-md shrink-0">
+                  <Image
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-
-                <p className="text-foreground leading-relaxed mb-6 relative z-10">
-                  &quot;{testimonial.quote}&quot;
-                </p>
-
-                <div className="flex items-center gap-4">
-                  <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-background shadow-md">
-                    <Image
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground">
-                      {testimonial.name}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      {testimonial.role}
-                    </p>
-                  </div>
+                <div>
+                  <p className="font-semibold text-foreground text-sm">
+                    {testimonial.name}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {testimonial.role}
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <Button
+            asChild
+            size="lg"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8"
+          >
+            <Link href="/about">
+              Learn More About Us
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
