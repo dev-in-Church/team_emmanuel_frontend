@@ -7,6 +7,7 @@ import { PageHero } from "@/components/page-hero";
 import { DonationModal } from "@/components/donate/donation-modal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
 import {
   Accordion,
   AccordionContent,
@@ -134,32 +135,63 @@ export default function DonatePage() {
           description="Your support helps provide running kits, school fees, uniforms, mentorship, and opportunities for talented young people determined to build a better future through sports and education."
           image="/images/hero2.jpg"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4 mt-8">
-            <Button
-              size="lg"
-              onClick={() => openModal()}
-              className="rounded-full px-8 bg-primary hover:bg-primary/90 text-primary-foreground"
-            >
-              Donate Now
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            <div className="flex items-center gap-2 text-xs text-white/60">
-              <Shield className="h-4 w-4" />
-              Secure checkout via Paystack &mdash; M-Pesa & card accepted
-            </div>
-          </div>
+          <div className="grid lg:grid-cols-[1fr_300px] gap-8 items-end mt-8">
+            {/* Left: CTA + quick-give (unchanged content, just moved into the grid) */}
+            <div>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
+                <Button
+                  size="lg"
+                  onClick={() => openModal()}
+                  className="rounded-full px-8 bg-primary hover:bg-primary/90 text-primary-foreground"
+                >
+                  Donate Now
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+                <div className="flex items-center gap-2 text-xs text-white/60">
+                  <Shield className="h-4 w-4" />
+                  Secure checkout via Paystack &mdash; M-Pesa & card accepted
+                </div>
+              </div>
 
-          {/* Quick-give presets */}
-          <div className="flex flex-wrap gap-2 mt-6">
-            {[500, 1000, 2500, 5000].map((amt) => (
-              <button
-                key={amt}
-                onClick={() => openModal(amt)}
-                className="px-4 py-2 rounded-full text-xs font-semibold bg-white/10 border border-white/15 text-white hover:bg-white/20 transition-colors"
-              >
-                Give KES {amt.toLocaleString()}
-              </button>
-            ))}
+              <div className="flex flex-wrap gap-2">
+                {[500, 1000, 2500, 5000].map((amt) => (
+                  <button
+                    key={amt}
+                    onClick={() => openModal(amt)}
+                    className="px-4 py-2 rounded-full text-xs font-semibold bg-white/10 border border-white/15 text-white hover:bg-white/20 transition-colors"
+                  >
+                    Give KES {amt.toLocaleString()}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: big payment badge panel — desktop only */}
+            <div className="hidden lg:flex flex-col gap-3">
+              <span className="text-xs text-white/50 uppercase tracking-wider font-semibold">
+                Trusted payment partners
+              </span>
+              <div className="bg-white rounded-2xl p-4 shadow-lg">
+                <Image
+                  src="/images/paystack-badge-ke.png"
+                  alt="Paystack — Mastercard, Visa, M-Pesa, Amex accepted"
+                  width={260}
+                  height={52}
+                  className="h-auto w-full"
+                />
+              </div>
+              <div className="flex items-center gap-2 bg-white/10 border border-white/15 rounded-2xl px-4 py-3">
+                <Image
+                  src="/wise-logo.webp"
+                  alt="Wise"
+                  width={24}
+                  height={24}
+                />
+                <span className="text-white text-sm font-medium">
+                  International transfers via Wise
+                </span>
+              </div>
+            </div>
           </div>
         </PageHero>
 
