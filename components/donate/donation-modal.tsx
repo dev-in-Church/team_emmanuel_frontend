@@ -37,8 +37,14 @@ interface PaystackSetupOptions {
 }
 
 type PaymentProvider = "paystack" | "wise";
+type Currency = "KES" | "USD" | "EUR";
 
 const suggestedAmounts = [500, 1000, 2500, 5000, 10000];
+
+const currencyOptionsByProvider: Record<PaymentProvider, Currency[]> = {
+  paystack: ["KES", "USD", "EUR"],
+  wise: ["USD", "EUR"],
+};
 
 const programs = [
   { value: "general", label: "Where Most Needed" },
@@ -67,7 +73,7 @@ export function DonationModal({
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const [provider, setProvider] = useState<PaymentProvider>("paystack");
-  const [currency, setCurrency] = useState<"KES" | "USD">("KES");
+  const [currency, setCurrency] = useState<Currency>("KES");
   const [frequency, setFrequency] = useState<"one-time" | "monthly">(
     "one-time",
   );
@@ -85,9 +91,15 @@ export function DonationModal({
   const canSubmit =
     amount > 0 && name.trim() && email.trim() && agreedToTerms && !submitting;
 
+  const availableCurrencies = currencyOptionsByProvider[provider];
+
+  // Keep the selected currency valid whenever the provider changes
+  // (e.g. Wise doesn't offer KES — fall back to USD if that was selected).
   useEffect(() => {
-    if (provider === "wise") setCurrency("USD");
-  }, [provider]);
+    if (!availableCurrencies.includes(currency)) {
+      setCurrency(provider === "wise" ? "USD" : "KES");
+    }
+  }, [provider]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (open) {
@@ -372,8 +384,8 @@ export function DonationModal({
                         <div className="mt-3 flex items-start gap-2 rounded-xl bg-muted/50 p-3 text-xs text-muted-foreground">
                           <Globe2 className="h-4 w-4 shrink-0 mt-0.5" />
                           <span>
-                            Wise is best for donors sending from outside Kenya —
-                            amounts are shown in USD.{" "}
+                            Wise is best for donors sending from outside Kenya -
+                            choose USD or EUR.{" "}
                             <em>
                               (Demo mode: no real transfer will be initiated.)
                             </em>
@@ -388,24 +400,22 @@ export function DonationModal({
                         <Label className="text-sm">
                           Choose amount ({currency})
                         </Label>
-                        {provider === "paystack" && (
-                          <div className="inline-flex items-center rounded-full bg-muted p-0.5 shrink-0">
-                            {(["KES", "USD"] as const).map((c) => (
-                              <button
-                                key={c}
-                                type="button"
-                                onClick={() => setCurrency(c)}
-                                className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
-                                  currency === c
-                                    ? "bg-primary text-primary-foreground"
-                                    : "text-muted-foreground"
-                                }`}
-                              >
-                                {c}
-                              </button>
-                            ))}
-                          </div>
-                        )}
+                        <div className="inline-flex items-center rounded-full bg-muted p-0.5 shrink-0">
+                          {availableCurrencies.map((c) => (
+                            <button
+                              key={c}
+                              type="button"
+                              onClick={() => setCurrency(c)}
+                              className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
+                                currency === c
+                                  ? "bg-primary text-primary-foreground"
+                                  : "text-muted-foreground"
+                              }`}
+                            >
+                              {c}
+                            </button>
+                          ))}
+                        </div>
                       </div>
 
                       <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 mb-4">
@@ -672,7 +682,7 @@ export function DonationModal({
                       <Lock className="h-3.5 w-3.5 shrink-0" />
                       {provider === "paystack"
                         ? "Secure checkout powered by Paystack."
-                        : "Demo mode — no real transfer initiated."}
+                        : "Demo mode - no real transfer initiated."}
                     </p>
 
                     <p className="text-[11px] text-muted-foreground text-center">
